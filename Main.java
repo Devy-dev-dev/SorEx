@@ -10,5 +10,6 @@ public class Main {
         System.out.println(s.getNom());
         System.out.println(s.getDateNaissance());
         System.out.println(s.getHashID());
+        System.out.println(s.getHashJAPD());
     }
 }

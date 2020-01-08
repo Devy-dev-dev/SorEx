@@ -41,13 +41,14 @@ public class Student {
         this.nom = "Albert";
         this.prenom = "Dupont";
         this.dateNaissance = LocalDate.of(1994, 2, 20);
-        exempleID(); // genere le SHA de l'image
+        this.hashID = exempleHash("src/documentsStudent/ID.png"); // genere le SHA de l'ID
+        this.hashJAPD = exempleHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
 
     }
 
-    private void exempleID() {
+    private String exempleHash(String file) {
         // image :
-        File input = new File("src/documentsStudent/ID.png");
+        File input = new File(file);
         try {
             // try to load the ID png image
             BufferedImage buffImg = ImageIO.read(input);
@@ -56,11 +57,12 @@ public class Student {
             byte[] IDdata = outputStream.toByteArray();
 
             // try to convert hash the IDdata from image
-            this.hashID = hashingFunction(IDdata);
+            return hashingFunction(IDdata);
         }
         catch (IOException e){
             e.printStackTrace();
         }
+        return file;
     }
 
     private String hashingFunction(byte[] IDdata) {
