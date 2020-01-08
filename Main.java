@@ -14,6 +14,5 @@ public class Main {
         else
             System.out.println("A été banni du système");
 
-        System.out.println("Test");
     }
 }
