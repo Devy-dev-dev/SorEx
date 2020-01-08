@@ -53,8 +53,8 @@ public class Student {
     // test que ça marche bien avec des valeurs exemples
     public Student() {
         nbStudent++;
-        this.diplomes = new ArrayList<>();
 
+        this.diplomes = new ArrayList<>();
         this.statutValide = true;
         this.nom = hashingFunction("Dupont".getBytes(StandardCharsets.UTF_8));
         this.prenom = hashingFunction("Albert".getBytes(StandardCharsets.UTF_8));
