@@ -13,5 +13,7 @@ public class Main {
             System.out.println("Est un étudiant valide");
         else
             System.out.println("A été banni du système");
+
+        System.out.println("Test");
     }
 }
