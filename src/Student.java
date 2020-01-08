@@ -35,7 +35,7 @@ public class Student {
     private String hashID;
     private String hashJAPD;
     private String hashBAC;     // hash tu baccalauréat
-    private String[] diplomesDetail = new String[5];
+    private String[] diplomeDetail = new String[5];
     private ArrayList<String> diplomes;
 
 
@@ -159,12 +159,12 @@ public class Student {
         this.hashBAC = hashBAC;
     }
 
-    public String[] getDiplomesDetail() {
-        return diplomesDetail;
+    public String[] getDiplomeDetail() {
+        return diplomeDetail;
     }
 
-    public void setDiplomesDetail(String[] diplomesDetail) {
-        this.diplomesDetail = diplomesDetail;
+    public void setDiplomeDetail(String[] diplomeDetail) {
+        this.diplomeDetail = diplomeDetail;
     }
 
     public ArrayList<String> getDiplomes() {
