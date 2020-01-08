@@ -2,6 +2,7 @@ package src;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.imageio.ImageIO;
@@ -14,8 +15,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Student {
+    static int nbStudent = 0;   // incrémente à chaque nouvel objet Etudiant créé
+
+
     /* possède les attributs suivants :
     - statutValide : true = OK, false = BANNED
+    - id unique (idStudent)
     - nom
     - prenom
     - date naissance
@@ -29,10 +34,12 @@ public class Student {
                                moyenne]
      */
 
+    private final String idStudent;  // unique ID -> final
     private boolean statutValide;
     private String nom;
     private String prenom;
-    private LocalDate dateNaissance;  // https://www.baeldung.com/java-8-date-time-intro
+//    private LocalDate dateNaissance;  // https://www.baeldung.com/java-8-date-time-intro
+    private String dateNaissance;  // https://www.baeldung.com/java-8-date-time-intro
     private String hashID;
     private String hashJAPD;
     private String hashBAC;     // hash tu baccalauréat
@@ -42,20 +49,23 @@ public class Student {
 
     // test que ça marche bien avec des valeurs exemples
     public Student() {
+        nbStudent++;
         this.diplomes = new ArrayList<>();
 
         this.statutValide = true;
-        this.nom = "Dupont";
-        this.prenom = "Albert";
-        this.dateNaissance = LocalDate.of(1994, 2, 20);
+        this.nom = hashingFunction("Dupont".getBytes(StandardCharsets.UTF_8));
+        this.prenom = hashingFunction("Albert".getBytes(StandardCharsets.UTF_8));
+        this.dateNaissance = hashingFunction(LocalDate.of(1994, 2, 20).toString().getBytes(StandardCharsets.UTF_8));
         this.hashID = imageHash("src/documentsStudent/ID.png"); // genere le SHA de l'ID
         this.hashJAPD = imageHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
-        this.hashBAC = imageHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
+        this.hashBAC = imageHash("src/documentsStudent/BAC.png"); // genere le SHA de la JAPD
         this.diplomeDetail = new String[]{"L1", "Géologie", "2017", "UPMC", "13.4"};
         this.diplomes.add(diplomeDetail);
 
         this.diplomeDetail = new String[]{"L2", "Géologie", "2018", "UPMC", "15.2"};
         this.diplomes.add(diplomeDetail);
+
+        this.idStudent = uniqueHash();
 
 
     }
@@ -78,14 +88,14 @@ public class Student {
         return null;  // si cela echoue on retourne null
     }
 
-    private String hashingFunction(byte[] IDdata) {
+    private String hashingFunction(byte[] data) {
         try {
             // getInstance() method is called with algorithm SHA-512
             MessageDigest md = MessageDigest.getInstance("SHA-512");
 
             // digest() method is called
             // to calculate message digest of the input png
-            byte[] messageDigest = md.digest(IDdata);
+            byte[] messageDigest = md.digest(data);
 
             // Convert byte array into signum representation
             BigInteger no = new BigInteger(1, messageDigest);
@@ -105,6 +115,27 @@ public class Student {
         return null;
     }
 
+    private String uniqueHash(){
+        String constantData = nbStudent+hashJAPD+hashBAC;  // on utilise des données qui ne changerons jamais
+        byte[] b = constantData.getBytes(StandardCharsets.UTF_8); // on les transforme en byte array
+        return hashingFunction(b);
+    }
+
+
+
+    // affiche les diplômes de la personne
+    @Override
+    public String toString(){
+        StringBuilder affichage = new StringBuilder();
+        for (String[] formation : diplomes) {
+            for (String value : formation) {
+                affichage.append(value).append(" ");
+            }
+            affichage.append("\n");
+        }
+        return affichage.toString();
+    }
+
 
 
 
@@ -112,6 +143,14 @@ public class Student {
     // ------------------------------------------------------------------------------- //
     // ------------------------------ GETTERS & SETTERS ------------------------------ //
     // ------------------------------------------------------------------------------- //
+    public int getNbStudent(){
+        return nbStudent;
+    }
+
+    public String getIdStudent(){
+        return idStudent;
+    }
+
     public boolean isStatutValide() {
         return statutValide;
     }
@@ -136,13 +175,10 @@ public class Student {
         this.prenom = prenom;
     }
 
-    public LocalDate getDateNaissance() {
+    public String getDateNaissance() {
         return dateNaissance;
     }
 
-    public void setDateNaissance(LocalDate dateNaissance) {
-        this.dateNaissance = dateNaissance;
-    }
 
     public String getHashID() {
         return hashID;
