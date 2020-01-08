@@ -30,12 +30,17 @@ public class Student {
     - arrayList de diplômes : [cursus diplôme,
                                nom diplôme,
                                date,
-                               université,
+                               université,          <-- détails du diplôme
                                moyenne]
      */
 
-    private final String idStudent;  // unique ID -> final
+    // ce qui n'est pas hashed :
     private boolean statutValide;
+    private String[] diplomeDetail;  // sert à construire diplomes
+    private ArrayList<String[]> diplomes;  // enregistre les diplômes
+
+    // Ce qui est hashed :
+    private final String idStudent;  // unique ID -> final
     private String nom;
     private String prenom;
 //    private LocalDate dateNaissance;  // https://www.baeldung.com/java-8-date-time-intro
@@ -43,8 +48,6 @@ public class Student {
     private String hashID;
     private String hashJAPD;
     private String hashBAC;     // hash tu baccalauréat
-    private String[] diplomeDetail;
-    private ArrayList<String[]> diplomes;
 
 
     // test que ça marche bien avec des valeurs exemples
