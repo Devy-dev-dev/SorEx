@@ -1,6 +1,7 @@
 package src;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Student {
     /* possède les attributs suivants :
@@ -19,7 +20,9 @@ public class Student {
     private String nom;
     private String prenom;
     private LocalDate dateNaissance;
-
-
+    String hashID;
+    String hashJAPD;
+    String[] diplomesDetail;
+    ArrayList<String> diplomes;
 
 }
