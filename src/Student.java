@@ -32,17 +32,19 @@ public class Student {
     private LocalDate dateNaissance;  // https://www.baeldung.com/java-8-date-time-intro
     private String hashID;
     private String hashJAPD;
+    private String hashBAC;     // hash tu baccalauréat
     private String[] diplomesDetail = new String[5];
     private ArrayList<String> diplomes;
 
 
     // test que ça marche bien avec des valeurs exemples
     public Student() {
-        this.nom = "Albert";
-        this.prenom = "Dupont";
+        this.nom = "Dupont";
+        this.prenom = "Albert";
         this.dateNaissance = LocalDate.of(1994, 2, 20);
         this.hashID = exempleHash("src/documentsStudent/ID.png"); // genere le SHA de l'ID
         this.hashJAPD = exempleHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
+        this.hashBAC = exempleHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
 
     }
 
@@ -131,6 +133,14 @@ public class Student {
 
     public void setHashJAPD(String hashJAPD) {
         this.hashJAPD = hashJAPD;
+    }
+
+    public String getHashBAC() {
+        return hashBAC;
+    }
+
+    public void setHashBAC(String hashBAC) {
+        this.hashBAC = hashBAC;
     }
 
     public String[] getDiplomesDetail() {
