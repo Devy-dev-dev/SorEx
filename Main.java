@@ -9,7 +9,7 @@ public class Main {
         System.out.println(s.getHashID());
         System.out.println(s.getHashJAPD());
         System.out.println(s.getHashBAC());
-        if (s.isStatut())
+        if (s.isStatutValide())
             System.out.println("Est un étudiant valide");
         else
             System.out.println("A été banni du système");

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Student {
     /* possède les attributs suivants :
-    - statut : true = OK, false = BANNED
+    - statutValide : true = OK, false = BANNED
     - nom
     - prenom
     - date naissance
@@ -28,7 +28,7 @@ public class Student {
                                moyenne]
      */
 
-    private boolean statut;
+    private boolean statutValide;
     private String nom;
     private String prenom;
     private LocalDate dateNaissance;  // https://www.baeldung.com/java-8-date-time-intro
@@ -41,7 +41,7 @@ public class Student {
 
     // test que ça marche bien avec des valeurs exemples
     public Student() {
-        this.statut = true;
+        this.statutValide = true;
         this.nom = "Dupont";
         this.prenom = "Albert";
         this.dateNaissance = LocalDate.of(1994, 2, 20);
@@ -103,12 +103,12 @@ public class Student {
     // ------------------------------------------------------------------------------- //
     // ------------------------------ GETTERS & SETTERS ------------------------------ //
     // ------------------------------------------------------------------------------- //
-    public boolean isStatut() {
-        return statut;
+    public boolean isStatutValide() {
+        return statutValide;
     }
 
-    public void setStatut(boolean statut) {
-        this.statut = statut;
+    public void setStatutValide(boolean statutValide) {
+        this.statutValide = statutValide;
     }
 
     public String getNom() {
