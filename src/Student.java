@@ -119,7 +119,7 @@ public class Student {
     }
 
     private String uniqueHash(){
-        String constantData = nbStudent+hashJAPD+hashBAC;  // on utilise des données qui ne changerons jamais
+        String constantData = nbStudent+hashJAPD+hashBAC+dateNaissance;  // on utilise des données qui ne changerons jamais
         byte[] b = constantData.getBytes(StandardCharsets.UTF_8); // on les transforme en byte array
         return hashingFunction(b);
     }
@@ -181,29 +181,16 @@ public class Student {
         return dateNaissance;
     }
 
-
     public String getHashID() {
         return hashID;
-    }
-
-    public void setHashID(String hashID) {
-        this.hashID = hashID;
     }
 
     public String getHashJAPD() {
         return hashJAPD;
     }
 
-    public void setHashJAPD(String hashJAPD) {
-        this.hashJAPD = hashJAPD;
-    }
-
     public String getHashBAC() {
         return hashBAC;
-    }
-
-    public void setHashBAC(String hashBAC) {
-        this.hashBAC = hashBAC;
     }
 
     public String[] getDiplomeDetail() {
