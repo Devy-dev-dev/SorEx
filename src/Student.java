@@ -11,6 +11,7 @@ import java.math.BigInteger;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Student {
     /* possède les attributs suivants :
@@ -35,12 +36,14 @@ public class Student {
     private String hashID;
     private String hashJAPD;
     private String hashBAC;     // hash tu baccalauréat
-    private String[] diplomeDetail = new String[5];
-    private ArrayList<String> diplomes;
+    private String[] diplomeDetail;
+    private ArrayList<String[]> diplomes;
 
 
     // test que ça marche bien avec des valeurs exemples
     public Student() {
+        this.diplomes = new ArrayList<>();
+
         this.statutValide = true;
         this.nom = "Dupont";
         this.prenom = "Albert";
@@ -48,6 +51,12 @@ public class Student {
         this.hashID = imageHash("src/documentsStudent/ID.png"); // genere le SHA de l'ID
         this.hashJAPD = imageHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
         this.hashBAC = imageHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
+        this.diplomeDetail = new String[]{"L1", "Géologie", "2017", "UPMC", "13.4"};
+        this.diplomes.add(diplomeDetail);
+
+        this.diplomeDetail = new String[]{"L2", "Géologie", "2018", "UPMC", "15.2"};
+        this.diplomes.add(diplomeDetail);
+
 
     }
 
@@ -167,11 +176,11 @@ public class Student {
         this.diplomeDetail = diplomeDetail;
     }
 
-    public ArrayList<String> getDiplomes() {
+    public ArrayList<String[]> getDiplomes() {
         return diplomes;
     }
 
-    public void setDiplomes(ArrayList<String> diplomes) {
+    public void setDiplomes(ArrayList<String[]> diplomes) {
         this.diplomes = diplomes;
     }
 }
