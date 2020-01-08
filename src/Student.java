@@ -14,12 +14,13 @@ import java.util.ArrayList;
 
 public class Student {
     /* possède les attributs suivants :
-    - statut : OK, BANNED
+    - statut : true = OK, false = BANNED
     - nom
     - prenom
     - date naissance
     - hash carte d'identité
     - hash JAPD
+    - hash BAC
     - arrayList de diplômes : [cursus diplôme,
                                nom diplôme,
                                date,
@@ -27,6 +28,7 @@ public class Student {
                                moyenne]
      */
 
+    private boolean statut;
     private String nom;
     private String prenom;
     private LocalDate dateNaissance;  // https://www.baeldung.com/java-8-date-time-intro
@@ -39,32 +41,32 @@ public class Student {
 
     // test que ça marche bien avec des valeurs exemples
     public Student() {
+        this.statut = true;
         this.nom = "Dupont";
         this.prenom = "Albert";
         this.dateNaissance = LocalDate.of(1994, 2, 20);
-        this.hashID = exempleHash("src/documentsStudent/ID.png"); // genere le SHA de l'ID
-        this.hashJAPD = exempleHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
-        this.hashBAC = exempleHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
+        this.hashID = imageHash("src/documentsStudent/ID.png"); // genere le SHA de l'ID
+        this.hashJAPD = imageHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
+        this.hashBAC = imageHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
 
     }
 
-    private String exempleHash(String file) {
-        // image :
-        File input = new File(file);
+    private String imageHash(String file) {
+        File input = new File(file);    // image
         try {
-            // try to load the ID png image
+            // try to load the image
             BufferedImage buffImg = ImageIO.read(input);
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ImageIO.write(buffImg, "png", outputStream);
             byte[] IDdata = outputStream.toByteArray();
 
-            // try to convert hash the IDdata from image
-            return hashingFunction(IDdata);
+            return hashingFunction(IDdata);  // try to convert hash the IDdata from image
         }
         catch (IOException e){
             e.printStackTrace();
         }
-        return file;
+
+        return null;  // si cela echoue on retourne null
     }
 
     private String hashingFunction(byte[] IDdata) {
@@ -94,6 +96,14 @@ public class Student {
         return null;
     }
 
+
+    public boolean isStatut() {
+        return statut;
+    }
+
+    public void setStatut(boolean statut) {
+        this.statut = statut;
+    }
 
     public String getNom() {
         return nom;
