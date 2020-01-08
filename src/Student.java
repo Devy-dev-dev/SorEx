@@ -131,9 +131,8 @@ public class Student {
     public String toString(){
         StringBuilder affichage = new StringBuilder();
         for (String[] formation : diplomes) {
-            for (String value : formation) {
+            for (String value : formation)
                 affichage.append(value).append(" ");
-            }
             affichage.append("\n");
         }
         return affichage.toString();
