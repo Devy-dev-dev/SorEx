@@ -9,7 +9,6 @@ public class Main {
     public static void main(String[] args) {
 //        Student s = new Student();
 //        Student s1 = new Student();
-//
 //        System.out.println("id s  : "+s.getIdStudent());
 //        System.out.println("id s1 : "+s1.getIdStudent());
 //        System.out.println(s.getNom());
