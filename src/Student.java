@@ -50,7 +50,7 @@ public class Student {
     private String hashBAC;     // hash tu baccalauréat
 
 
-    // test que ça marche bien avec des valeurs exemples
+    // création Etudiant vide (pour générer 1er bloc
     public Student() {
         nbStudent++;
 
@@ -62,15 +62,31 @@ public class Student {
         this.hashID = imageHash("src/documentsStudent/ID.png"); // genere le SHA de l'ID
         this.hashJAPD = imageHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
         this.hashBAC = imageHash("src/documentsStudent/BAC.png"); // genere le SHA de la JAPD
-        this.diplomeDetail = new String[]{"L1", "Géologie", "2017", "UPMC", "13.4"};
+        this.diplomeDetail = new String[]{"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
         this.diplomes.add(diplomeDetail);
-
-        this.diplomeDetail = new String[]{"L2", "Géologie", "2018", "UPMC", "15.2"};
-        this.diplomes.add(diplomeDetail);
-
         this.idStudent = uniqueHash();
+    }
 
+    // ajout d'un nouvel étudiant
+    public Student(String nom, String prenom, LocalDate dateNaissance,
+                   String pathToID, String pathToJAPD, String pathToBAC,
+                   String[] diplomeDetail) {
+        nbStudent++;
 
+        this.diplomes = new ArrayList<>();
+        this.statutValide = true;
+        this.nom = hashingFunction(nom.getBytes(StandardCharsets.UTF_8));
+        this.prenom = hashingFunction(prenom.getBytes(StandardCharsets.UTF_8));
+        this.dateNaissance = hashingFunction(dateNaissance.toString().getBytes(StandardCharsets.UTF_8));
+        this.hashID = imageHash("src/documentsStudent/ID.png"); // genere le SHA de l'ID
+        this.hashJAPD = imageHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
+        this.hashBAC = imageHash("src/documentsStudent/BAC.png"); // genere le SHA de la JAPD
+//        this.diplomeDetail = new String[]{"L1", "Géologie", "2017", "UPMC", "13.4"};
+        this.diplomes.add(diplomeDetail);
+
+//        this.diplomeDetail = new String[]{"L2", "Géologie", "2018", "UPMC", "15.2"};
+//        this.diplomes.add(diplomeDetail);
+        this.idStudent = uniqueHash();
     }
 
     private String imageHash(String file) {
