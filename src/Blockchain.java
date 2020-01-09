@@ -13,6 +13,12 @@ public class Blockchain{
         this.getGenesisBlock();
     }
 
+    // pour fork
+    // TODO: regarder si ça marche bien
+    private Blockchain(MinimalBlock block){
+        this.addBlock(block);
+    }
+
 
     private void getGenesisBlock(){
         this.blocks.add(new MinimalBlock(0, LocalDate.now(), new Student(), "empty"));
@@ -25,6 +31,13 @@ public class Blockchain{
                                      this.blocks.get(this.blocks.size()-1).getCurrentHash())
         );
     }
+
+    public void addBlock(Blockchain this, MinimalBlock blocks){
+        if(!blocks.isEmpty())
+            addBlock(blocks.getStudent());
+    }
+
+
 
     public int getChainSize(){
         return this.blocks.size();
@@ -56,7 +69,11 @@ public class Blockchain{
         return flag;
     }
 
-    public ArrayList<MinimalBlock> fork(){
+    // sert à dupliquer la blockchain
+    // TODO: Ne marche pas
+    /*
+//    public ArrayList<MinimalBlock> fork(){
+    public Blockchain fork(){
         MinimalBlock[] copyBlock = new MinimalBlock[this.blocks.size()];
 
         for(int i = 0; i < copyBlock.length; i++){
@@ -65,11 +82,22 @@ public class Blockchain{
                                             this.blocks.get(i).getStudent(),
                                             this.blocks.get(i).getPreviousHash());
         }
-        return new ArrayList<>(Arrays.asList(copyBlock));
+        ArrayList<MinimalBlock> blockCopied = new ArrayList<>(Arrays.asList(copyBlock));
+        System.out.println("taille blockcopied : "+blockCopied.size());
+        Blockchain b = new Blockchain(blockCopied.get(0));
+//        b.addBlock(blockCopied.get(0));
+        for(int i = 1; i < blockCopied.size(); i++) {
+            System.out.println("blockCopied(i) : "+blockCopied.get(i).getStudent().getIdStudent());
+            b.addBlock(blockCopied.get(i));
+        }
+
+        return b;
     }
 
+     */
+
     public String[] listAllHash(){
-//        System.out.println("taille blockchain : "+this.blocks.size());
+        System.out.println("taille blockchain : "+this.blocks.size());
         String[] allHash = new String[this.blocks.size()];
         for(int i = 0; i < this.blocks.size(); i++)
             allHash[i] = this.blocks.get(i).getCurrentHash();
@@ -86,4 +114,18 @@ public class Blockchain{
     }
 
 
+    public ArrayList<MinimalBlock> getBlock(){
+        return blocks;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder infoBlockChain = new StringBuilder();
+        for (MinimalBlock block : blocks) {
+            infoBlockChain.append(block.toString());
+            infoBlockChain.append("\n");
+        }
+        return infoBlockChain.toString();
+
+    }
 }

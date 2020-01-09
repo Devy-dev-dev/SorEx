@@ -70,4 +70,12 @@ public class MinimalBlock extends ArrayList<MinimalBlock> {
     public Student getStudent() {
         return student;
     }
+
+    @Override
+    public String toString(){
+        String infoBlock ="";
+        infoBlock += index +" "+timestamp+" ";
+        infoBlock += student.toString();
+        return infoBlock;
+    }
 }

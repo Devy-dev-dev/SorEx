@@ -65,6 +65,8 @@ public class Student {
         this.diplomeDetail = new String[]{"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
         this.diplomes.add(diplomeDetail);
         this.idStudent = uniqueHash();
+//        System.out.println("id etudiant n°"+nbStudent+" : "+ idStudent);
+
     }
 
     // ajout d'un nouvel étudiant
@@ -87,6 +89,7 @@ public class Student {
 //        this.diplomeDetail = new String[]{"L2", "Géologie", "2018", "UPMC", "15.2"};
 //        this.diplomes.add(diplomeDetail);
         this.idStudent = uniqueHash();
+//        System.out.println("id etudiant n°"+nbStudent+" : "+ idStudent);
     }
 
     private String imageHash(String file) {
@@ -146,6 +149,7 @@ public class Student {
     @Override
     public String toString(){
         StringBuilder affichage = new StringBuilder();
+        affichage.append("\n");
         for (String[] formation : diplomes) {
             for (String value : formation)
                 affichage.append(value).append(" ");
@@ -221,8 +225,8 @@ public class Student {
         return diplomes;
     }
 
-    public void setDiplomes(ArrayList<String[]> diplomes) {
-        this.diplomes = diplomes;
+    public void addDiplomes(String[] diplomes) {
+        this.diplomes.add(diplomes);
     }
 }
 
