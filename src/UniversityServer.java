@@ -10,7 +10,7 @@ import java.awt.image.*;
 import java.awt.*;
 import javax.imageio.ImageIO;
 
-public class ServerUniversity {
+public class UniversityServer {
 //    ServerSocket s;
 //
 //    public ServerUniversity() throws IOException {
