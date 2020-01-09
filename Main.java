@@ -61,7 +61,7 @@ public class Main {
         System.out.println("---------------------------------");
         System.out.println("Test block a le bon hash étudiant");
         for(int i = 0; i < b.getBlock().size(); i++){
-            System.out.println("hach block         : "+b.getBlock().get(i).getCurrentHash());
+            System.out.println("hash block         : "+b.getBlock().get(i).getCurrentHash());
             System.out.println("hash etudiant      : "+b.getBlock().get(i).getStudent().getIdStudent());
             System.out.println("formation etudiant : "+b.getBlock().get(i).getStudent().toString());
             System.out.println();
