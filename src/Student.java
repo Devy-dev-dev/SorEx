@@ -12,7 +12,6 @@ import java.math.BigInteger;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Student {
     static int nbStudent = 0;   // incrémente à chaque nouvel objet Etudiant créé

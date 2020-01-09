@@ -1,11 +1,10 @@
 import src.Blockchain;
-import src.MinimalBlock;
 import src.Student;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 
+// TODO: creer une classe EnrolledStudent qui possède une copie du hash de ses données depuis le block
+//  cae pour l'instant les étudiants ne peuvent pas utiliser la technologie
 public class Main {
     public static void main(String[] args) {
 //        Student s = new Student();

@@ -2,8 +2,6 @@ package src;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 
 public class Blockchain{
     ArrayList<MinimalBlock> blocks = new ArrayList<>();
