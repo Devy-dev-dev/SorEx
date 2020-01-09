@@ -4,7 +4,7 @@ import src.Student;
 import java.time.LocalDate;
 
 // TODO: creer une classe EnrolledStudent qui possède une copie du hash de ses données depuis le block
-//  cae pour l'instant les étudiants ne peuvent pas utiliser la technologie
+//  car pour l'instant les étudiants ne peuvent pas utiliser la technologie
 public class Main {
     public static void main(String[] args) {
 //        Student s = new Student();
