@@ -37,7 +37,11 @@ public class Blockchain{
 
 
     public void addBlock(Blockchain this, Student student){
-        this.blocks.add(new MinimalBlock(this.blocks.size(), LocalDate.now(), student, this.blocks.get(this.blocks.size()-1).getCurrentHash()));
+        this.blocks.add(new MinimalBlock(this.blocks.size(), LocalDate.now(), student, this.blocks.get(this.blocks.size() - 1).getCurrentHash()));
+    }
+
+    public void addBlock(MinimalBlock block){
+        this.blocks.add(new MinimalBlock(this.blocks.size(), block.getTimestamp(), block.getStudent(), this.blocks.get(this.blocks.size() - 1).getCurrentHash()));
     }
 
     // trouve le block à partir du hash donné
@@ -138,8 +142,10 @@ public class Blockchain{
     }
 
     public boolean verifyAllBlockchain(Blockchain b2){
-        if (this.getChainSize() != b2.getChainSize())
+        if (this.getChainSize() != b2.getChainSize()) {
+            System.out.println("Different length");
             return false;
+        }
         return this.verify(b2.getBlock());
     }
 
@@ -178,5 +184,19 @@ public class Blockchain{
             infoBlockChain.append("\n");
         }
         return infoBlockChain.toString();
+    }
+
+    public String displayLastBlockInfo(){
+        String message = "";
+        message += "index         : "+ this.blocks.get(this.blocks.size()-1).getIndex()+"\n";
+        message += "timestamp     : "+this.blocks.get(this.blocks.size()-1).getTimestamp()+"\n";
+        message += "previous hash : "+this.blocks.get(this.blocks.size()-1).getPreviousHash()+"\n";
+        message += "current hash  : "+this.blocks.get(this.blocks.size()-1).getCurrentHash()+"\n";
+        message += "student id    : "+this.blocks.get(this.blocks.size()-1).getStudent().getIdStudent()+"\n";
+        return message;
+    }
+
+    public MinimalBlock getLastBlock(){
+        return this.blocks.get(this.blocks.size()-1);
     }
 }

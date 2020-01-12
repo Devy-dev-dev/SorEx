@@ -11,9 +11,9 @@ public class Main {
         String nom = "John";
         String prenom = "Doe";
         LocalDate l = LocalDate.now();
-        String id = " ";
-        String japd = " ";
-        String bac = " ";
+        String id = "src/documentsStudent/ID.png";
+        String japd = "src/documentsStudent/JAPD.png";
+        String bac = "src/documentsStudent/BAC.png";
         String[] diplomes = new String[] {"L1", "Geol", "UPMC", "2019", "12.7"};
 
         b.addBlock(new Student(nom, prenom, l, id, japd, bac, diplomes));
@@ -22,28 +22,14 @@ public class Main {
         b.getBlock().get(1).getStudent().addDiplomes(new String[] {"L2", "Geol", "UPMC", "2020", "14.7"});
 
 
-//        System.out.println("Test copy !");
-//        Blockchain copy = b.fork();
-//        System.out.println("Copy == origin : "+copy.verifyAllBlockchain(b));
-//
-//        copy.getBlock().get(1).getStudent().addDiplomes(new String[] {"L3", "Geol", "UPMC", "2020", "17.5"});
-//        System.out.println("Copy == origin : "+copy.verifyAllBlockchain(b));
-//
-//
-//        copy.addBlock(new Student(nom, prenom, l, id, japd, bac, diplomes));
-//        System.out.println("Copy == origin : "+copy.verifyAllBlockchain(b));
-//
-//        System.out.println();
-//        System.out.println("Copy : ");
-//        System.out.println(copy.toString());
-//        System.out.println("Original : ");
-        System.out.println(b.toString());
+        System.out.println("Test qu'ajouter le même dernier block à la copie créer la même blockchain valide");
+        Blockchain copy = b.fork();
+        b.addBlock(new Student(nom, prenom, l, id, japd, bac, diplomes));
+        copy.addBlock(b.getLastBlock());
 
-        String toFind = "b6c3fff3755946f3c3d67e40becb55f4c7f919d2c70fc1c4bfc61d7d6d23da5a22366a7b695e642a0d2a30cd4987e581016a93a5ddeed839ae1126a7964b9e6";
-        System.out.print("index de "+toFind+" : ");
-        System.out.println(b.findBlockFromHash(toFind));
-        System.out.println("Compétences de cette personne : "+b.getBlock().get(b.findBlockFromHash(toFind)).getStudent().toString());
 
+
+        // pour partager l'information, il faut que l'université partage l'infos du Student aux autres pour qu'elles puissent créer le bloc.
 
 
 

@@ -77,4 +77,5 @@ public class MinimalBlock extends ArrayList<MinimalBlock> {
         infoBlock += student.toString();
         return infoBlock;
     }
+
 }

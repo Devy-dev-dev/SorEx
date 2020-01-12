@@ -75,9 +75,9 @@ public class Student {
         this.nom = hashingFunction(nom.getBytes(StandardCharsets.UTF_8));
         this.prenom = hashingFunction(prenom.getBytes(StandardCharsets.UTF_8));
         this.dateNaissance = hashingFunction(dateNaissance.toString().getBytes(StandardCharsets.UTF_8));
-        this.hashID = imageHash("src/documentsStudent/ID.png"); // genere le SHA de l'ID
-        this.hashJAPD = imageHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
-        this.hashBAC = imageHash("src/documentsStudent/BAC.png"); // genere le SHA de la JAPD
+        this.hashID = imageHash(pathToID); // genere le SHA de l'ID
+        this.hashJAPD = imageHash(pathToJAPD); // genere le SHA de la JAPD
+        this.hashBAC = imageHash(pathToBAC); // genere le SHA de la JAPD
         this.diplomes.add(diplomeDetail);
         this.idStudent = uniqueHash();
     }
