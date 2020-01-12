@@ -38,11 +38,10 @@ public class Blockchain{
         this.blocks.add(new MinimalBlock(this.blocks.size(), LocalDate.now(), student, this.blocks.get(this.blocks.size()-1).getCurrentHash()));
     }
 
-    public void addBlock(Blockchain this, MinimalBlock blocks){
-        if(!blocks.isEmpty())
-            addBlock(blocks.getStudent());
-    }
-
+//    public void addBlock(Blockchain this, MinimalBlock blocks){
+//        if(!blocks.isEmpty())
+//            addBlock(blocks.getStudent());
+//    }
 
 
     public int getChainSize(){
