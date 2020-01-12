@@ -20,12 +20,9 @@ public class Main {
 
         // ajout d'un nouveau diplôme de l'étudiant
         b.getBlock().get(1).getStudent().addDiplomes(new String[] {"L2", "Geol", "UPMC", "2020", "14.7"});
-
-
-        System.out.println("Test qu'ajouter le même dernier block à la copie créer la même blockchain valide");
         Blockchain copy = b.fork();
-        b.addBlock(new Student(nom, prenom, l, id, japd, bac, diplomes));
-        copy.addBlock(b.getLastBlock());
+
+
 
 
 
