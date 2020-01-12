@@ -24,13 +24,20 @@ public class Main {
 
         System.out.println("Test copy !");
         Blockchain copy = b.fork();
-        copy.getBlock().get(1).getStudent().addDiplomes(new String[] {"L3", "Geol", "UPMC", "2020", "17.5"});
-        copy.addBlock(new Student(nom, prenom, l, id, japd, bac, diplomes));
+        System.out.println("Copy == origin : "+copy.verifyAllBlockchain(b));
 
-        System.out.println("Copy : ");
-        System.out.println(copy.toString());
-        System.out.println("Original : ");
-        System.out.println(b.toString());
+        copy.getBlock().get(1).getStudent().addDiplomes(new String[] {"L3", "Geol", "UPMC", "2020", "17.5"});
+        System.out.println("Copy == origin : "+copy.verifyAllBlockchain(b));
+
+
+        copy.addBlock(new Student(nom, prenom, l, id, japd, bac, diplomes));
+        System.out.println("Copy == origin : "+copy.verifyAllBlockchain(b));
+
+//        System.out.println();
+//        System.out.println("Copy : ");
+//        System.out.println(copy.toString());
+//        System.out.println("Original : ");
+//        System.out.println(b.toString());
 
 
 

@@ -1,5 +1,7 @@
 package src;
 
+import jdk.nashorn.internal.ir.Block;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -48,7 +50,8 @@ public class Blockchain{
         return this.blocks.size();
     }
 
-    public boolean verify(MinimalBlock blocks){
+    // TODO: ajouter vérification des attributs du student car on peut mettre à jour certains infos comme la formation
+    public boolean verify(ArrayList<MinimalBlock> blocks){
         boolean flag = true;
         for(int i = 0; i < blocks.size(); i++){
             if(this.blocks.get(i).getIndex() != i){
@@ -56,23 +59,81 @@ public class Blockchain{
                 System.out.println("Wrong block index at block "+i);
             }
 
-            if(!this.blocks.get(i-1).getCurrentHash().equals(blocks.get(i).getPreviousHash())){
-                flag = false;
-                System.out.println("Wrong previous hash at block "+i);
-            }
 
             if(!this.blocks.get(i).getCurrentHash().equals(this.blocks.get(i).hashingFunction())){
                 flag = false;
                 System.out.println("Wrong hash at block "+i);
             }
 
-            if(this.blocks.get(i-1).getTimestamp().compareTo(this.blocks.get(i).getTimestamp()) >= 1){
+
+            // check que les objets étudiants sont les mêmes
+            if(!this.blocks.get(i).getStudent().getDiplomes().equals(blocks.get(i).getStudent().getDiplomes())){
                 flag = false;
-                System.out.println("Backdating at block "+i);
+                System.out.println("Difference of diploma at block "+i);
+            }
+
+            if(this.blocks.get(i).getStudent().isStatutValide() != blocks.get(i).getStudent().isStatutValide()){
+                flag = false;
+                System.out.println("Difference of validity at block "+i);
+            }
+
+            if(!this.blocks.get(i).getStudent().getNom().equals(blocks.get(i).getStudent().getNom())){
+                flag = false;
+                System.out.println("Difference of name at block "+i);
+            }
+
+            if(!this.blocks.get(i).getStudent().getPrenom().equals(blocks.get(i).getStudent().getPrenom())){
+                flag = false;
+                System.out.println("Difference of name at block "+i);
+            }
+
+            if(!this.blocks.get(i).getStudent().getDateNaissance().equals(blocks.get(i).getStudent().getDateNaissance())){
+                flag = false;
+                System.out.println("Difference of birthday at block "+i);
+            }
+
+            if(!this.blocks.get(i).getStudent().getIdStudent().equals(blocks.get(i).getStudent().getIdStudent())){
+                flag = false;
+                System.out.println("Difference of student ID at block "+i);
+            }
+
+            if(!this.blocks.get(i).getStudent().getHashID().equals(blocks.get(i).getStudent().getHashID())){
+                flag = false;
+                System.out.println("Difference of ID at block "+i);
+            }
+
+            if(!this.blocks.get(i).getStudent().getHashJAPD().equals(blocks.get(i).getStudent().getHashJAPD())){
+                flag = false;
+                System.out.println("Difference of JAPD at block "+i);
+            }
+
+            if(!this.blocks.get(i).getStudent().getHashBAC().equals(blocks.get(i).getStudent().getHashBAC())){
+                flag = false;
+                System.out.println("Difference of BAC at block "+i);
+            }
+
+
+            if (i > 0) {
+                if (!this.blocks.get(i - 1).getCurrentHash().equals(blocks.get(i).getPreviousHash())) {
+                    flag = false;
+                    System.out.println("Wrong previous hash at block " + i);
+                }
+
+                if (this.blocks.get(i - 1).getTimestamp().compareTo(this.blocks.get(i).getTimestamp()) >= 1) {
+                    flag = false;
+                    System.out.println("Backdating at block " + i);
+                }
             }
         }
         return flag;
     }
+
+    public boolean verifyAllBlockchain(Blockchain b2){
+        if (this.getChainSize() != b2.getChainSize())
+            return false;
+        return this.verify(b2.getBlock());
+    }
+
 
     // fork la blockchain (= la copie)
     public Blockchain fork() {
@@ -92,7 +153,6 @@ public class Blockchain{
         String[] allHash = new String[this.blocks.size()];
         for(int i = 0; i < this.blocks.size(); i++)
             allHash[i] = this.blocks.get(i).getStudent().getIdStudent();
-
         return allHash;
     }
 
