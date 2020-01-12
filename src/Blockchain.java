@@ -40,6 +40,16 @@ public class Blockchain{
         this.blocks.add(new MinimalBlock(this.blocks.size(), LocalDate.now(), student, this.blocks.get(this.blocks.size()-1).getCurrentHash()));
     }
 
+    // trouve le block à partir du hash donné
+    public int findBlockFromHash(String givenHash){
+        for(int i = 0; i < this.getBlock().size(); i++){
+            if(this.getBlock().get(i).getCurrentHash().equals(givenHash))
+                return i;
+        }
+        return -1;
+    }
+
+
 //    public void addBlock(Blockchain this, MinimalBlock blocks){
 //        if(!blocks.isEmpty())
 //            addBlock(blocks.getStudent());
@@ -169,6 +179,5 @@ public class Blockchain{
             infoBlockChain.append("\n");
         }
         return infoBlockChain.toString();
-
     }
 }
