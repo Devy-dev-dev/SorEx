@@ -60,7 +60,6 @@ public class Blockchain{
         return this.blocks.size();
     }
 
-    // TODO: ajouter vérification des attributs du student car on peut mettre à jour certains infos comme la formation
     public boolean verify(ArrayList<MinimalBlock> blocks){
         boolean flag = true;
         for(int i = 0; i < blocks.size(); i++){
@@ -145,7 +144,7 @@ public class Blockchain{
     }
 
 
-    // fork la blockchain (= la copie)
+    // fork la blockchain (= copie la blockchain)
     public Blockchain fork() {
         return new Blockchain(this);
     }
