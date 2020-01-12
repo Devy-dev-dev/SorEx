@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class Student {
     static int nbStudent = 0;   // incrémente à chaque nouvel objet Etudiant créé
 
-
     /* possède les attributs suivants :
     - statutValide : true = OK, false = BANNED
     - id unique (idStudent)
@@ -35,7 +34,6 @@ public class Student {
 
     // ce qui n'est pas hashed :
     private boolean statutValide;
-//    private String[] diplomeDetail;  // sert à construire diplomes
     private ArrayList<String[]> diplomes;  // enregistre les diplômes
 
     // Ce qui est hashed :
@@ -49,7 +47,7 @@ public class Student {
     private String hashBAC;     // hash tu baccalauréat
 
 
-    // création Etudiant vide (pour générer 1er bloc
+    // création Etudiant vide (pour générer 1er bloc)
     public Student() {
         nbStudent++;
 
@@ -64,8 +62,6 @@ public class Student {
         String[] diplomeDetail = new String[]{"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
         this.diplomes.add(diplomeDetail);
         this.idStudent = uniqueHash();
-//        System.out.println("id etudiant n°"+nbStudent+" : "+ idStudent);
-
     }
 
     // ajout d'un nouvel étudiant
@@ -82,15 +78,11 @@ public class Student {
         this.hashID = imageHash("src/documentsStudent/ID.png"); // genere le SHA de l'ID
         this.hashJAPD = imageHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
         this.hashBAC = imageHash("src/documentsStudent/BAC.png"); // genere le SHA de la JAPD
-//        this.diplomeDetail = new String[]{"L1", "Géologie", "2017", "UPMC", "13.4"};
         this.diplomes.add(diplomeDetail);
-
-//        this.diplomeDetail = new String[]{"L2", "Géologie", "2018", "UPMC", "15.2"};
-//        this.diplomes.add(diplomeDetail);
         this.idStudent = uniqueHash();
-//        System.out.println("id etudiant n°"+nbStudent+" : "+ idStudent);
     }
 
+    // copie un étudiant. Sert à fork la blockchain
     private Student(Student origin){
         this.idStudent = new String(origin.getIdStudent());
         this.nom = new String(origin.getNom());
