@@ -35,7 +35,7 @@ public class Student {
 
     // ce qui n'est pas hashed :
     private boolean statutValide;
-    private String[] diplomeDetail;  // sert à construire diplomes
+//    private String[] diplomeDetail;  // sert à construire diplomes
     private ArrayList<String[]> diplomes;  // enregistre les diplômes
 
     // Ce qui est hashed :
@@ -61,7 +61,7 @@ public class Student {
         this.hashID = imageHash("src/documentsStudent/ID.png"); // genere le SHA de l'ID
         this.hashJAPD = imageHash("src/documentsStudent/JAPD.png"); // genere le SHA de la JAPD
         this.hashBAC = imageHash("src/documentsStudent/BAC.png"); // genere le SHA de la JAPD
-        this.diplomeDetail = new String[]{"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
+        String[] diplomeDetail = new String[]{"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
         this.diplomes.add(diplomeDetail);
         this.idStudent = uniqueHash();
 //        System.out.println("id etudiant n°"+nbStudent+" : "+ idStudent);
@@ -90,6 +90,19 @@ public class Student {
         this.idStudent = uniqueHash();
 //        System.out.println("id etudiant n°"+nbStudent+" : "+ idStudent);
     }
+
+    private Student(Student origin){
+        this.idStudent = new String(origin.getIdStudent());
+        this.nom = new String(origin.getNom());
+        this.prenom = new String(origin.getPrenom());
+        this.dateNaissance = new String(origin.getDateNaissance());
+        this.hashID = new String(origin.getHashID());
+        this.hashJAPD = new String(origin.getHashJAPD());
+        this.hashBAC = new String(origin.getHashBAC());
+        this.diplomes = new ArrayList<>(origin.diplomes);
+        this.statutValide = origin.isStatutValide();
+    }
+
 
     private String imageHash(String file) {
         File input = new File(file);    // image
@@ -158,6 +171,10 @@ public class Student {
     }
 
 
+    public Student fork(){
+        return new Student(this);
+    }
+
 
 
 
@@ -212,13 +229,13 @@ public class Student {
         return hashBAC;
     }
 
-    public String[] getDiplomeDetail() {
-        return diplomeDetail;
-    }
-
-    public void setDiplomeDetail(String[] diplomeDetail) {
-        this.diplomeDetail = diplomeDetail;
-    }
+//    public String[] getDiplomeDetail() {
+//        return diplomeDetail;
+//    }
+//
+//    public void setDiplomeDetail(String[] diplomeDetail) {
+//        this.diplomeDetail = diplomeDetail;
+//    }
 
     public ArrayList<String[]> getDiplomes() {
         return diplomes;

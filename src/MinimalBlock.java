@@ -17,10 +17,6 @@ public class MinimalBlock extends ArrayList<MinimalBlock> {
     private String currentHash;
 
     public MinimalBlock(int index, LocalDate timestamp, Student s, String previousHash){
-//        System.out.println("index        : "+index);
-//        System.out.println("timestamp    : "+timestamp);
-//        System.out.println("student      : "+s.toString());
-//        System.out.println("previousHash : "+previousHash);
         this.index = index;
         this.timestamp = timestamp;
         this.student = s;
@@ -74,6 +70,9 @@ public class MinimalBlock extends ArrayList<MinimalBlock> {
     @Override
     public String toString(){
         String infoBlock ="";
+        infoBlock += "student hash  : "+getStudent().getIdStudent()+"\n";
+        infoBlock += "current hash  : " +this.currentHash+"\n";
+        infoBlock += "previous hash : " +this.previousHash+"\n";
         infoBlock += index +" "+timestamp+" ";
         infoBlock += student.toString();
         return infoBlock;

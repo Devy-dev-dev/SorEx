@@ -31,7 +31,7 @@ public class Main {
 
         // creation nouveau etudiant
         String nom = "John";
-        String prennom = "Doe";
+        String prenom = "Doe";
         LocalDate l = LocalDate.now();
         String id = " ";
         String japd = " ";
@@ -39,7 +39,7 @@ public class Main {
         String[] diplomes = new String[] {"L1", "Geol", "UPMC", "2019", "12.7"};
 
         b.addBlock(new Student(nom,
-                                prennom,
+                                prenom,
                                 l,
                                 id,
                                 japd,
@@ -56,6 +56,7 @@ public class Main {
 //        for(String hashS: tousLesHashEtudiant)
 //            System.out.println(hashS);
 
+        /*
         System.out.println();
         System.out.println("---------------------------------");
         System.out.println("Test block a le bon hash étudiant");
@@ -70,22 +71,20 @@ public class Main {
         System.out.println("---------------------------------");
         System.out.println("Test toString() blockchain");
         System.out.println(b.toString());
+         */
 
 
         // MARCHE PAS ENCORE
-//        System.out.println("Test copy !");
-        // test que copy marche
-//        ArrayList<MinimalBlock> a1 = b.fork();
-//        b1.addBlock(a1.get(0));
-//        for (MinimalBlock minimalBlock : a1)
-//            b1.addBlock(minimalBlock);
-//        tousLesHash = b1.listAllHash();
-//        for(String hashS: tousLesHash)
-//            System.out.println(hashS);
-//
-//        tousLesHashEtudiant = b1.listAllHash();
-//        for(String hashS: tousLesHashEtudiant)
-//            System.out.println(hashS);
+        System.out.println("Test copy !");
+        Blockchain copy = b.fork();
+        copy.getBlock().get(1).getStudent().addDiplomes(new String[] {"L3", "Geol", "UPMC", "2020", "17.5"});
+
+        System.out.println("Copy : ");
+        System.out.println(copy.toString());
+        System.out.println("Original : ");
+        System.out.println(b.toString());
+
+
 
 
 

@@ -11,23 +11,31 @@ public class Blockchain{
         this.getGenesisBlock();
     }
 
-    // pour fork
-    // TODO: regarder si ça marche bien
-    private Blockchain(MinimalBlock block){
-        this.addBlock(block);
+    // pour copier la blockchain
+    private Blockchain(Blockchain origin){
+        int size = 0;
+        for(int i = 0; i < origin.getBlock().size(); i++){
+            Student tempStudent = origin.getBlock().get(i).getStudent().fork();
+
+            if (i == 0)
+                this.blocks.add(new MinimalBlock(size, origin.getBlock().get(i).getTimestamp(), tempStudent, "empty"));
+            else
+                this.blocks.add(new MinimalBlock(size, origin.getBlock().get(i).getTimestamp(), tempStudent, this.blocks.get(this.blocks.size() - 1).getCurrentHash()));
+            size++;
+        }
+
     }
+
 
 
     private void getGenesisBlock(){
         this.blocks.add(new MinimalBlock(0, LocalDate.now(), new Student(), "empty"));
     }
 
+
+
     public void addBlock(Blockchain this, Student student){
-        this.blocks.add(new MinimalBlock(this.blocks.size(),
-                                     LocalDate.now(),
-                                     student,
-                                     this.blocks.get(this.blocks.size()-1).getCurrentHash())
-        );
+        this.blocks.add(new MinimalBlock(this.blocks.size(), LocalDate.now(), student, this.blocks.get(this.blocks.size()-1).getCurrentHash()));
     }
 
     public void addBlock(Blockchain this, MinimalBlock blocks){
@@ -67,39 +75,17 @@ public class Blockchain{
         return flag;
     }
 
-    // sert à dupliquer la blockchain
-    // TODO: Ne marche pas
-    /*
-//    public ArrayList<MinimalBlock> fork(){
-    public Blockchain fork(){
-        MinimalBlock[] copyBlock = new MinimalBlock[this.blocks.size()];
-
-        for(int i = 0; i < copyBlock.length; i++){
-            copyBlock[i] = new MinimalBlock(this.blocks.get(i).getIndex(),
-                                            this.blocks.get(i).getTimestamp(),
-                                            this.blocks.get(i).getStudent(),
-                                            this.blocks.get(i).getPreviousHash());
-        }
-        ArrayList<MinimalBlock> blockCopied = new ArrayList<>(Arrays.asList(copyBlock));
-        System.out.println("taille blockcopied : "+blockCopied.size());
-        Blockchain b = new Blockchain(blockCopied.get(0));
-//        b.addBlock(blockCopied.get(0));
-        for(int i = 1; i < blockCopied.size(); i++) {
-            System.out.println("blockCopied(i) : "+blockCopied.get(i).getStudent().getIdStudent());
-            b.addBlock(blockCopied.get(i));
-        }
-
-        return b;
+    // fork la blockchain (= la copie)
+    public Blockchain fork() {
+        return new Blockchain(this);
     }
 
-     */
 
     public String[] listAllHash(){
         System.out.println("taille blockchain : "+this.blocks.size());
         String[] allHash = new String[this.blocks.size()];
         for(int i = 0; i < this.blocks.size(); i++)
             allHash[i] = this.blocks.get(i).getCurrentHash();
-
         return allHash;
     }
 
