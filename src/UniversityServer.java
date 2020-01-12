@@ -22,15 +22,22 @@ public class UniversityServer {
         // System.out.println("Please enter the port number:"); //3024
         // int port = myObj.nextInt();
         // myObj.nextLine();
-        ServerSocket serverSocket = new ServerSocket(3024);
-        // System.out.println("Waiting for connexions in port " + port);
-        System.out.println("   _____            ______    ");
-        System.out.println("  / ___/____  _____/ ____/  __");        
-        System.out.println("  \\__ \\/ __ \\/ ___/ __/ | |/_/");
-        System.out.println(" ___/ / /_/ / /  / /____>  < ");
-        System.out.println("/____/\\____/_/  /_____/_/|_|");
-        System.out.println("\nWelcome to SorEx! \nThe blockchain for students and universities to handle administration process.");
-        SorEx(serverSocket);
+
+        if (args[1].equals("server")) {
+            ServerSocket serverSocket = new ServerSocket(Integer.parseInt(args[0]));
+            // System.out.println("Waiting for connexions in port " + port);
+            System.out.println("   _____            ______    ");
+            System.out.println("  / ___/____  _____/ ____/  __");
+            System.out.println("  \\__ \\/ __ \\/ ___/ __/ | |/_/");
+            System.out.println(" ___/ / /_/ / /  / /____>  < ");
+            System.out.println("/____/\\____/_/  /_____/_/|_|");
+            System.out.println("\nWelcome to SorEx! \nThe blockchain for students and universities to handle administration process.");
+            SorEx(serverSocket);
+        }else{
+            Socket clientSocket = new Socket("localhost", Integer.parseInt(args[0]));
+            SorEx(clientSocket);
+            clientSocket.close();
+        }
     }
 
     public static void SorEx(ServerSocket server) throws Exception {
@@ -68,7 +75,23 @@ public class UniversityServer {
         System.out.println("New block hash: "+blockHash);
 
         outToClient.println("Congratulations! Your hash is: "+blockHash);
+
         }
-        
+    }
+
+    public static void SorEx(Socket soc) throws Exception {
+        Socket clientSocket = new Socket();
+        clientSocket = soc;
+
+        String fromServer, message;
+        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.println("Ecrit quelque chose");
+        message = inFromUser.readLine();
+        outToServer.writeBytes(message + '\n');// write answer
+
+
     }
 }

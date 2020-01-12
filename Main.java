@@ -1,6 +1,8 @@
+import jdk.nashorn.internal.runtime.ECMAException;
 import src.Blockchain;
 import src.Student;
 
+import java.io.*;
 import java.time.LocalDate;
 
 public class Main {
@@ -21,17 +23,17 @@ public class Main {
         // ajout d'un nouveau diplôme de l'étudiant
         b.getBlock().get(1).getStudent().addDiplomes(new String[] {"L2", "Geol", "UPMC", "2020", "14.7"});
         Blockchain copy = b.fork();
-
-
-
-
-
+        b.addBlock(new Student(nom, prenom, l, id, japd, bac, diplomes));
+        copy.addBlock(b.getLastBlock());
         // pour partager l'information, il faut que l'université partage l'infos du Student aux autres pour qu'elles puissent créer le bloc.
 
 
+        // TODO: rajouter possibilité préfecture de mettre à jour carte d'identité + nom et prénom
+        // TODO: ajouter possibilité chiffrer addresse et clef privée --> récupérer adresse étudiant
 
 
 
 
-    }
+
+}
 }
