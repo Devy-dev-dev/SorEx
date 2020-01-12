@@ -65,7 +65,7 @@ class ServerThread extends Thread{
             System.out.println("IO Error/ Client "+line+" terminated abruptly");
         } catch(NullPointerException e){
             line = this.getName(); //reused String line for getting thread name
-            System.out.println("Client "+line+" Closed");
+            System.out.println("Client "+ line +" Closed");
         }
 
         finally{    
