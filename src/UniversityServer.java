@@ -8,7 +8,7 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 
 public class UniversityServer {
-    public static void main(String args[]){
+    public static void main(String[] args){
         Socket s = null;
         ServerSocket s1 = null;
         System.out.println("Server Listening......");
