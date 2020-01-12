@@ -12,10 +12,10 @@ import javax.imageio.ImageIO;
 import java.time.LocalDate;
 
 public class UniversityServer {
-    
+    static Student s;
+    static Blockchain b = new Blockchain();
     public static void main(String[] args) throws Exception {
-        Student s;
-        BlockChain b;
+        
         // Scanner myObj = new Scanner(System.in); 
         // System.out.println("Please enter the domain name:"); //localhost
         // String domainName = myObj.nextLine();
@@ -24,25 +24,27 @@ public class UniversityServer {
         // myObj.nextLine();
         ServerSocket serverSocket = new ServerSocket(3024);
         // System.out.println("Waiting for connexions in port " + port);
-        Socket clientSocket = serverSocket.accept();
-        System.out.println("Connection established");
+        System.out.println("   _____            ______    ");
+        System.out.println("  / ___/____  _____/ ____/  __");        
+        System.out.println("  \\__ \\/ __ \\/ ___/ __/ | |/_/");
+        System.out.println(" ___/ / /_/ / /  / /____>  < ");
+        System.out.println("/____/\\____/_/  /_____/_/|_|");
+        System.out.println("\nWelcome to SorEx! \nThe blockchain for students and universities to handle administration process.");
         SorEx(serverSocket);
     }
 
     public static void SorEx(ServerSocket server) throws Exception {
         ServerSocket serverSocket = server;
         Socket clientSocket = serverSocket.accept();
+        System.out.println("Connection established");
+        boolean running = true;
+
+        while(running){
+
+        String message;
         PrintWriter outToClient = new PrintWriter(clientSocket.getOutputStream(), true);
         BufferedReader infromClient = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-        String message;
-
-        System.out.println("   _____            ______    ");
-        System.out.println("  / ___/____  _____/ ____/  __");        
-        System.out.println("  \\__ \\/ __ \\/ ___/ __/ | |/_/");
-        System.out.println(" ___/ / /_/ / /  / /____>  < ");
-        System.out.println("/____/\\____/_/  /_____/_/|_|");
-        System.out.println("\nWelcome to SorEx! \nThe blockchain for students and universities to handle your administration process.");
         
         outToClient.println("Please enter your first name:");
         System.out.println("Student is typing...");
@@ -60,12 +62,13 @@ public class UniversityServer {
                         LastName, 
                         birthDate, " ", " ", " ",
                         diplomes);
-        b.addBlock(b, s);
+        b.addBlock(s);
         String blockHash = b.getBlock().get(b.getBlock().size()-1).getCurrentHash();
+        System.out.println("Student is waiting...");
         System.out.println("New block hash: "+blockHash);
 
         outToClient.println("Congratulations! Your hash is: "+blockHash);
-    
+        }
         
     }
 }

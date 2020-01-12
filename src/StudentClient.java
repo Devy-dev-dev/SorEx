@@ -18,23 +18,27 @@ public class StudentClient {
         // myObj.nextLine();
         Socket clientSocket = new Socket("localhost", 3024);
         System.out.println("Connection established");
-        SorEx();
-    }
-
-    public static void SorEx() throws Exception {
-        String fromServer, message;
-        Socket clientSocket = new Socket();
-        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-
         System.out.println("   _____            ______    ");
         System.out.println("  / ___/____  _____/ ____/  __");        
         System.out.println("  \\__ \\/ __ \\/ ___/ __/ | |/_/");
         System.out.println(" ___/ / /_/ / /  / /____>  < ");
         System.out.println("/____/\\____/_/  /_____/_/|_|");
-        System.out.println("\nWelcome to SorEx! \nThe blockchain for students and universities to handle your administration process.");
-        
+        System.out.println("\nWelcome to SorEx! \nThe blockchain for students and universities to handle administration process.");
+        SorEx(clientSocket);
+    }
+
+    public static void SorEx(Socket soc) throws Exception {
+        Socket clientSocket = new Socket();
+        clientSocket = soc;
+        boolean running = true;
+
+        while(running){
+
+        String fromServer, message;
+        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+
         fromServer = inFromServer.readLine();
         System.out.println("From Server: " + fromServer);// first name question
         message = inFromUser.readLine();
@@ -53,7 +57,7 @@ public class StudentClient {
         System.out.println("SorEx is processing...");
         fromServer = inFromServer.readLine();
         System.out.println("From Server: " + fromServer);// return hash code
-        
+        }
     }
 
 }
