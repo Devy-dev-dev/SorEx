@@ -37,7 +37,9 @@ public class Student {
     private ArrayList<String[]> diplomes;  // enregistre les diplômes
 
     // Ce qui est hashed :
-    private final String idStudent;  // unique ID -> final
+    // SUPPRIMEEEE !!!!
+//    private final String idStudent;  // unique ID -> final
+    // =====
     private String nom;
     private String prenom;
 //    private LocalDate dateNaissance;  // https://www.baeldung.com/java-8-date-time-intro
@@ -61,7 +63,7 @@ public class Student {
         this.hashBAC = imageHash("src/documentsStudent/BAC.png"); // genere le SHA de la JAPD
         String[] diplomeDetail = new String[]{"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
         this.diplomes.add(diplomeDetail);
-        this.idStudent = uniqueHash();
+//        this.idStudent = uniqueHash();
     }
 
     // ajout d'un nouvel étudiant
@@ -79,12 +81,12 @@ public class Student {
         this.hashJAPD = imageHash(pathToJAPD); // genere le SHA de la JAPD
         this.hashBAC = imageHash(pathToBAC); // genere le SHA de la JAPD
         this.diplomes.add(diplomeDetail);
-        this.idStudent = uniqueHash();
+//        this.idStudent = uniqueHash();
     }
 
     // copie un étudiant. Sert à fork la blockchain
     private Student(Student origin){
-        this.idStudent = new String(origin.getIdStudent());
+//        this.idStudent = new String(origin.getIdStudent());
         this.nom = new String(origin.getNom());
         this.prenom = new String(origin.getPrenom());
         this.dateNaissance = new String(origin.getDateNaissance());
@@ -93,6 +95,26 @@ public class Student {
         this.hashBAC = new String(origin.getHashBAC());
         this.diplomes = new ArrayList<>(origin.diplomes);
         this.statutValide = origin.isStatutValide();
+    }
+
+    // sert à recréer l'étudiant depuis la lecture d'un fichier
+    public Student(String nom, String prenom, String dateNaissance,
+                   String pathToID, String pathToJAPD, String pathToBAC,
+                    boolean readFromFile) {
+
+        if (readFromFile) {
+//            this.idStudent = idStudent;
+            this.diplomes = new ArrayList<>();
+            this.statutValide = true;
+            this.nom = nom;
+            this.prenom = prenom;
+            this.dateNaissance = dateNaissance;
+            this.hashID = pathToID; // genere le SHA de l'ID
+            this.hashJAPD = pathToJAPD; // genere le SHA de la JAPD
+            this.hashBAC = pathToBAC; // genere le SHA de la JAPD
+//            this.diplomes.add(diplomeDetail);
+        }
+
     }
 
 
@@ -153,7 +175,12 @@ public class Student {
     @Override
     public String toString(){
         StringBuilder affichage = new StringBuilder();
-        affichage.append("\n");
+//        affichage.append("\n|||");
+        affichage.append("\nHash ID   : ").append(this.hashID).append("\n");
+        affichage.append("Hash JAPD : ").append(this.hashJAPD).append("\n");
+        affichage.append("Hash BAC  : ").append(this.hashBAC).append("\n");
+
+        affichage.append("Diploma  : \n");
         for (String[] formation : diplomes) {
             for (String value : formation)
                 affichage.append(value).append(" ");
@@ -177,9 +204,9 @@ public class Student {
         return nbStudent;
     }
 
-    public String getIdStudent(){
-        return idStudent;
-    }
+//    public String getIdStudent(){
+//        return idStudent;
+//    }
 
     public boolean isStatutValide() {
         return statutValide;

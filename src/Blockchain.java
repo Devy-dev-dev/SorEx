@@ -23,6 +23,12 @@ public class Blockchain{
         for(int i = 0; i < origin.getBlock().size(); i++){
             Student tempStudent = origin.getBlock().get(i).getStudent().fork();
 
+//            if (i == 0)
+//                this.blocks.add(new MinimalBlock(size, origin.getBlock().get(i).getTimestamp(), tempStudent, "empty"));
+//            else
+//                this.blocks.add(new MinimalBlock(size, origin.getBlock().get(i).getTimestamp(), tempStudent, this.blocks.get(this.blocks.size() - 1).getCurrentHash()));
+//            size++;
+
             if (i == 0)
                 this.blocks.add(new MinimalBlock(size, origin.getBlock().get(i).getTimestamp(), tempStudent, "empty"));
             else
@@ -32,16 +38,21 @@ public class Blockchain{
 
     }
 
+    // pour créer blockchain depuis un fichier
+    public Blockchain(MinimalBlock b){
+        this.blocks.add(b);
+    }
+
 
 
     private void getGenesisBlock(){
-        this.blocks.add(new MinimalBlock(0, LocalDate.now(), new Student(), "empty"));
+        this.blocks.add(new MinimalBlock(0, LocalDate.now().toString(), new Student(), "empty"));
     }
 
 
 
     public void addBlock(Blockchain this, Student student){
-        this.blocks.add(new MinimalBlock(this.blocks.size(), LocalDate.now(), student, this.blocks.get(this.blocks.size() - 1).getCurrentHash()));
+        this.blocks.add(new MinimalBlock(this.blocks.size(), LocalDate.now().toString(), student, this.blocks.get(this.blocks.size() - 1).getCurrentHash()));
     }
 
     public void addBlock(MinimalBlock block){
@@ -84,10 +95,21 @@ public class Blockchain{
 
 
             // check que les objets étudiants sont les mêmes
-            if(!this.blocks.get(i).getStudent().getDiplomes().equals(blocks.get(i).getStudent().getDiplomes())){
-                flag = false;
-                System.out.println("Difference of diploma at block "+i);
+            for(int diploma = 0; diploma < this.blocks.get(i).getStudent().getDiplomes().size(); diploma++){
+                String diploma1 = Arrays.toString(this.blocks.get(i).getStudent().getDiplomes().get(diploma));
+                String diploma2 = Arrays.toString(blocks.get(i).getStudent().getDiplomes().get(diploma));
+                if(this.blocks.get(i).getStudent().getDiplomes().size() != blocks.get(i).getStudent().getDiplomes().size()){
+                    flag = false;
+                    System.out.println("Difference of number of diploma at block "+i);
+                    break;
+                }
+                if(!diploma1.equals(diploma2)){
+                    flag = false;
+                    System.out.println("Difference of diploma at block "+i);
+                    break;
+                }
             }
+
 
             if(this.blocks.get(i).getStudent().isStatutValide() != blocks.get(i).getStudent().isStatutValide()){
                 flag = false;
@@ -101,7 +123,7 @@ public class Blockchain{
 
             if(!this.blocks.get(i).getStudent().getPrenom().equals(blocks.get(i).getStudent().getPrenom())){
                 flag = false;
-                System.out.println("Difference of name at block "+i);
+                System.out.println("Difference of firstname at block "+i);
             }
 
             if(!this.blocks.get(i).getStudent().getDateNaissance().equals(blocks.get(i).getStudent().getDateNaissance())){
@@ -109,10 +131,10 @@ public class Blockchain{
                 System.out.println("Difference of birthday at block "+i);
             }
 
-            if(!this.blocks.get(i).getStudent().getIdStudent().equals(blocks.get(i).getStudent().getIdStudent())){
-                flag = false;
-                System.out.println("Difference of student ID at block "+i);
-            }
+//            if(!this.blocks.get(i).getStudent().getIdStudent().equals(blocks.get(i).getStudent().getIdStudent())){
+//                flag = false;
+//                System.out.println("Difference of student ID at block "+i);
+//            }
 
             if(!this.blocks.get(i).getStudent().getHashID().equals(blocks.get(i).getStudent().getHashID())){
                 flag = false;
@@ -168,12 +190,12 @@ public class Blockchain{
         return allHash;
     }
 
-    public String[] listAllHashStudent(){
-        String[] allHash = new String[this.blocks.size()];
-        for(int i = 0; i < this.blocks.size(); i++)
-            allHash[i] = this.blocks.get(i).getStudent().getIdStudent();
-        return allHash;
-    }
+//    public String[] listAllHashStudent(){
+//        String[] allHash = new String[this.blocks.size()];
+//        for(int i = 0; i < this.blocks.size(); i++)
+//            allHash[i] = this.blocks.get(i).getStudent().getIdStudent();
+//        return allHash;
+//    }
 
 
     public ArrayList<MinimalBlock> getBlock(){
@@ -196,7 +218,7 @@ public class Blockchain{
         message += "timestamp     : "+this.blocks.get(this.blocks.size()-1).getTimestamp()+"\n";
         message += "previous hash : "+this.blocks.get(this.blocks.size()-1).getPreviousHash()+"\n";
         message += "current hash  : "+this.blocks.get(this.blocks.size()-1).getCurrentHash()+"\n";
-        message += "student id    : "+this.blocks.get(this.blocks.size()-1).getStudent().getIdStudent()+"\n";
+//        message += "student id    : "+this.blocks.get(this.blocks.size()-1).getStudent().getIdStudent()+"\n";
         return message;
     }
 
@@ -209,20 +231,23 @@ public class Blockchain{
             File tempFile = new File("blockchain.txt");
             boolean exists = tempFile.exists();
 
-            if(!exists) {
+            //TODO: inverser la condition quand on voudra implémenter le append
+            if(exists) {
                 FileWriter fileWriter = new FileWriter("blockchain.txt");
                 PrintWriter printWriter = new PrintWriter(fileWriter);
+                printWriter.println(this.blocks.size());
                 for (int i = 0; i < this.blocks.size(); i++) {
-                    printWriter.printf("%d\n", this.blocks.get(i).getIndex());
-                    printWriter.println(this.blocks.get(i).getTimestamp().toString());
-                    printWriter.println(this.blocks.get(i).getPreviousHash());
-                    printWriter.println(this.blocks.get(i).getCurrentHash());
-                    printWriter.println(this.blocks.get(i).getStudent().getIdStudent());
-                    printWriter.println(this.blocks.get(i).getStudent().getNom());
-                    printWriter.println(this.blocks.get(i).getStudent().getPrenom());
-                    printWriter.println(this.blocks.get(i).getStudent().getHashID());
-                    printWriter.println(this.blocks.get(i).getStudent().getHashJAPD());
-                    printWriter.println(this.blocks.get(i).getStudent().getHashBAC());
+                    printWriter.printf("%d\n", this.blocks.get(i).getIndex());  // 0
+                    printWriter.println(this.blocks.get(i).getTimestamp());  // 1
+                    printWriter.println(this.blocks.get(i).getPreviousHash());  // 2
+                    printWriter.println(this.blocks.get(i).getCurrentHash());  // 3
+//                    printWriter.println(this.blocks.get(i).getStudent().getIdStudent());
+                    printWriter.println(this.blocks.get(i).getStudent().getNom());  // 4
+                    printWriter.println(this.blocks.get(i).getStudent().getPrenom());  // 5
+                    printWriter.println(this.blocks.get(i).getStudent().getDateNaissance());   // 6
+                    printWriter.println(this.blocks.get(i).getStudent().getHashID()); // 7
+                    printWriter.println(this.blocks.get(i).getStudent().getHashJAPD());  // 8
+                    printWriter.println(this.blocks.get(i).getStudent().getHashBAC());  // 9
                     for (int j = 0; j < this.blocks.get(i).getStudent().getDiplomes().size(); j++)
                         printWriter.println(Arrays.toString(this.blocks.get(i).getStudent().getDiplomes().get(j)));
 
@@ -232,18 +257,20 @@ public class Blockchain{
             }else{
                 FileWriter fileWriter = new FileWriter("blockchain.txt", true);
                 PrintWriter printWriter = new PrintWriter(fileWriter);
+                printWriter.println(this.blocks.size());
                 for (int i = 0; i < this.blocks.size(); i++) {
-                    printWriter.printf("%d\n", this.blocks.get(i).getIndex());
-                    printWriter.println(this.blocks.get(i).getTimestamp().toString());
-                    printWriter.println(this.blocks.get(i).getPreviousHash());
-                    printWriter.println(this.blocks.get(i).getCurrentHash());
-                    printWriter.println(this.blocks.get(i).getStudent().getIdStudent());
-                    printWriter.println(this.blocks.get(i).getStudent().getNom());
-                    printWriter.println(this.blocks.get(i).getStudent().getPrenom());
-                    printWriter.println(this.blocks.get(i).getStudent().getHashID());
-                    printWriter.println(this.blocks.get(i).getStudent().getHashJAPD());
-                    printWriter.println(this.blocks.get(i).getStudent().getHashBAC());
-                    for (int j = 0; j < this.blocks.get(i).getStudent().getDiplomes().size(); j++)
+                    printWriter.printf("%d\n", this.blocks.get(i).getIndex());       // 0
+                    printWriter.println(this.blocks.get(i).getTimestamp().toString()); // 1
+                    printWriter.println(this.blocks.get(i).getPreviousHash());         // 2
+                    printWriter.println(this.blocks.get(i).getCurrentHash());          // 3
+//                    printWriter.println(this.blocks.get(i).getStudent().getIdStudent());  // 4
+                    printWriter.println(this.blocks.get(i).getStudent().getNom());      // 4
+                    printWriter.println(this.blocks.get(i).getStudent().getPrenom());   // 5
+                    printWriter.println(this.blocks.get(i).getStudent().getDateNaissance());   // 6
+                    printWriter.println(this.blocks.get(i).getStudent().getHashID());   // 7
+                    printWriter.println(this.blocks.get(i).getStudent().getHashJAPD()); // 8
+                    printWriter.println(this.blocks.get(i).getStudent().getHashBAC());  // 9
+                    for (int j = 0; j < this.blocks.get(i).getStudent().getDiplomes().size(); j++)  // 10
                         printWriter.println(Arrays.toString(this.blocks.get(i).getStudent().getDiplomes().get(j)));
 
                     printWriter.println("DONE");

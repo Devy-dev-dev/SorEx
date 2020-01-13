@@ -1,4 +1,7 @@
+import jdk.nashorn.internal.ir.Block;
+import jdk.nashorn.internal.ir.BlockLexicalContext;
 import src.Blockchain;
+import src.MinimalBlock;
 import src.Student;
 
 
@@ -7,6 +10,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.concurrent.Semaphore;
 
 public class Main {
@@ -52,10 +57,13 @@ public class Main {
             e.printStackTrace();
         }
 
-        retrieveBlockchainFromFile();
+        Blockchain bRead = retrieveBlockchainFromFile();
+
+        System.out.println("identique ? : "+b.verifyAllBlockchain(bRead));
+
     }
 
-    public static void retrieveBlockchainFromFile(){
+    public static Blockchain retrieveBlockchainFromFile(){
         try {
             File file = new File("blockchain.txt");
             FileReader fr = new FileReader(file);   //reads the file
@@ -63,22 +71,104 @@ public class Main {
             StringBuffer sb = new StringBuffer();    //constructs a string buffer with no characters
             String line;
             String temp = "";
+
+            // on récupère la taille de la bolckchain
+            line = br.readLine();
+            int taille = Integer.parseInt(line);
+            String[] donnees;
+
+            // on lit le reste de la blockchain (sans la taille au début du fichier)
             while ((line = br.readLine()) != null) {
-                if(line.charAt(0) == "[".charAt(0)) {
+                if (line.charAt(0) == "[".charAt(0)) {
                     temp = line;
-                    while(!temp.contains("DONE")) {
-                        temp += br.readLine();
+                    while (!temp.contains("DONE")) {
+                        temp = br.readLine();
+                        line += temp;
                     }
-                    line = temp;
-                    temp = "";
                 }
-                System.out.println("line : "+line);
+                sb.append(line);
+                sb.append("\n");
 
             }
+            String blockchainText = sb.toString();
+            blockchainText = blockchainText.replace("][", "\n");
+            blockchainText = blockchainText.replace("[", "");
+            blockchainText = blockchainText.replace("]", "\n");
+            donnees = blockchainText.split("\n");
+
+
+            String[] blockchainArray = new String[taille];
+            int cpt = 0;
+            for(int i = 0; i < donnees.length; i++){
+                blockchainArray[cpt] = "";
+                while(!donnees[i].equals("DONE")){
+                    blockchainArray[cpt] += donnees[i]+"\n";
+                    i++;
+                }
+                cpt++;
+            }
+
+            Blockchain bTemp = null;
+            for(int i = 0; i < blockchainArray.length; i++){
+                String[] data = blockchainArray[i].split("\n");
+                int parcoursData = 10;
+                String inlineformation = "";
+                while (parcoursData < data.length){
+                    inlineformation += data[parcoursData]+"\n";
+                    parcoursData++;
+                }
+                inlineformation = inlineformation.replace(",", "");
+                String[] formation = inlineformation.split("\n");
+//                System.out.println("formation = "+Arrays.toString(formation));
+
+//                System.out.println(formation);
+
+
+                // Student :
+//                String nom, String prenom, String dateNaissance,
+//                        String pathToID, String pathToJAPD, String pathToBAC,
+//                boolean readFromFile
+
+                Student s = new Student(
+                        data[4],
+                        data[5],
+                        data[6],
+                        data[7],
+                        data[8],
+                        data[9],
+//                        formation,
+                        true
+                );
+                for(int j = 0; j < formation.length; j++)
+                    s.addDiplomes(formation[j].split(" "));
+
+                MinimalBlock block = new MinimalBlock(
+                        Integer.parseInt(data[0]),
+                        data[1],
+                        s,
+                        data[2],
+                        data[3],
+                        true
+                );
+                if(i == 0)
+                    bTemp = new Blockchain(block);
+                else
+                    bTemp.addBlock(block);
+
+            }
+            System.out.println("Blockchain résultante :\n");
+//            b.getBlock().remove(0);
+//            System.out.println(bTemp.toString());
+
+            return bTemp;
+
+
         }
         catch (IOException e){
             e.printStackTrace();
         }
+
+        return null;
 
     }
 
