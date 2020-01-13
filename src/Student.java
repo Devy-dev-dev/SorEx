@@ -240,5 +240,8 @@ public class Student {
     public void addDiplomes(String[] diplomes) {
         this.diplomes.add(diplomes);
     }
-}
 
+    public void updateID(String pathToNewID) {
+        setHashID(imageHash(pathToNewID));
+    }
+}
