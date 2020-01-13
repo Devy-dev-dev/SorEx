@@ -63,14 +63,14 @@ public class Main {
             File file = new File("blockchain.txt");
             FileReader fr = new FileReader(file);   //reads the file
             BufferedReader br = new BufferedReader(fr);  //creates a buffering character input stream
-            StringBuffer sb = new StringBuffer();    //constructs a string buffer with no characters
+            StringBuilder sb = new StringBuilder();    //constructs a string buffer with no characters
             String line;
-            String temp = "";
+            String temp = "";   // utilisée pour remplir dans line l'ArrayList des blocs lus
 
             // on récupère la taille de la bolckchain
             line = br.readLine();
             int taille = Integer.parseInt(line);
-            String[] donnees;
+            String[] donnees;   // chaque indice contient 1 bloc
 
             // on lit le reste de la blockchain (sans la taille au début du fichier)
             while ((line = br.readLine()) != null) {
@@ -107,63 +107,49 @@ public class Main {
             for(int i = 0; i < blockchainArray.length; i++){
                 String[] data = blockchainArray[i].split("\n");
                 int parcoursData = 10;
-                String inlineformation = "";
+                StringBuilder inlineformation = new StringBuilder();
                 while (parcoursData < data.length){
-                    inlineformation += data[parcoursData]+"\n";
+                    inlineformation.append(data[parcoursData]).append("\n");
                     parcoursData++;
                 }
-                inlineformation = inlineformation.replace(",", "");
-                String[] formation = inlineformation.split("\n");
-//                System.out.println("formation = "+Arrays.toString(formation));
+                inlineformation = new StringBuilder(inlineformation.toString().replace(",", ""));
+                String[] formation = inlineformation.toString().split("\n");
 
-//                System.out.println(formation);
-
-
-                // Student :
-//                String nom, String prenom, String dateNaissance,
-//                        String pathToID, String pathToJAPD, String pathToBAC,
-//                boolean readFromFile
-
-                Student s = new Student(
+                // 1. on créer un étudiant depuis les valeurs lues
+                Student s = new Student();
+                s = s.newStudentFromFile(
                         data[4],
                         data[5],
                         data[6],
                         data[7],
                         data[8],
                         data[9],
-//                        formation,
-                        true
+                        formation
                 );
-                for(int j = 0; j < formation.length; j++)
-                    s.addDiplomes(formation[j].split(" "));
 
-                MinimalBlock block = new MinimalBlock(
+                // 2. on créer un block ensuite
+                MinimalBlock block = new MinimalBlock();
+                block = block.minimalBlockFromFile(
                         Integer.parseInt(data[0]),
                         data[1],
                         s,
                         data[2],
-                        data[3],
-                        true
-                );
+                        data[3]
+                        );
+
+                // 3. on met a jour la blockchain
                 if(i == 0)
                     bTemp = new Blockchain(block);
                 else
                     bTemp.addBlock(block);
 
             }
-            System.out.println("Blockchain résultante :\n");
-//            b.getBlock().remove(0);
-//            System.out.println(bTemp.toString());
-
             return bTemp;
-
-
         }
         catch (IOException e){
             e.printStackTrace();
         }
-
-        return null;
+        return null;  // si il y a eu un probleme
 
     }
 

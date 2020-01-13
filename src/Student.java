@@ -92,7 +92,7 @@ public class Student {
     }
 
     // sert à recréer l'étudiant depuis la lecture d'un fichier
-    public Student(String nom, String prenom, String dateNaissance,
+    private Student(String nom, String prenom, String dateNaissance,
                    String pathToID, String pathToJAPD, String pathToBAC,
                     boolean readFromFile) {
 
@@ -183,6 +183,15 @@ public class Student {
 
     public Student fork(){
         return new Student(this);
+    }
+
+    // sert à créer un nouvel étudiant depuis le fichier lu
+    public Student newStudentFromFile(String nom, String prenom,
+                                      String dateNaissance, String ID,
+                                      String JAPD, String BAC, String[] formation){
+        Student s = new Student(nom, prenom, dateNaissance, ID, JAPD, BAC, true);
+        for (String value : formation) s.addDiplomes(value.split(" "));
+        return s;
     }
 
 

@@ -151,6 +151,10 @@ public class Blockchain{
     }
 
     public boolean verifyAllBlockchain(Blockchain b2){
+        if(b2 == null){
+            System.out.println("blockchain in parenthesis is null");
+            return false;
+        }
         if (this.getChainSize() != b2.getChainSize()) {
             System.out.println("Different length");
             return false;

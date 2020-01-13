@@ -24,14 +24,23 @@ public class MinimalBlock extends ArrayList<MinimalBlock> {
         this.currentHash = hashingFunction();
     }
 
-    public MinimalBlock(int index, String timestamp, Student s, String previousHash, String currentHash, boolean readFromFile){
-        if (readFromFile) {
-            this.index = index;
-            this.timestamp = timestamp.toString();
-            this.student = s;
-            this.previousHash = previousHash;
-            this.currentHash = currentHash;
-        }
+    private MinimalBlock(int index, String timestamp, Student s, String previousHash, String currentHash){
+        this.index = index;
+        this.timestamp = timestamp.toString();
+        this.student = s;
+        this.previousHash = previousHash;
+        this.currentHash = currentHash;
+
+    }
+
+    public MinimalBlock(){
+
+    }
+
+    public MinimalBlock minimalBlockFromFile(int index, String timestamp,
+                                             Student s,
+                                             String previousHash, String currentHash){
+        return new MinimalBlock(index, timestamp, s, previousHash, currentHash);
     }
 
 
