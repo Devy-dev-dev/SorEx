@@ -228,55 +228,31 @@ public class Blockchain{
 
     public void writeBlockchain() {
         try {
-            File tempFile = new File("blockchain.txt");
-            boolean exists = tempFile.exists();
+//            // Décommenter pour ajouter possibilité d'append
+//            File tempFile = new File("blockchain.txt");
+//            boolean exists = tempFile.exists();
+//            //utiliser condition quand on voudra implémenter le append
 
-            //TODO: inverser la condition quand on voudra implémenter le append
-            if(exists) {
-                FileWriter fileWriter = new FileWriter("blockchain.txt");
-                PrintWriter printWriter = new PrintWriter(fileWriter);
-                printWriter.println(this.blocks.size());
-                for (int i = 0; i < this.blocks.size(); i++) {
-                    printWriter.printf("%d\n", this.blocks.get(i).getIndex());  // 0
-                    printWriter.println(this.blocks.get(i).getTimestamp());  // 1
-                    printWriter.println(this.blocks.get(i).getPreviousHash());  // 2
-                    printWriter.println(this.blocks.get(i).getCurrentHash());  // 3
-//                    printWriter.println(this.blocks.get(i).getStudent().getIdStudent());
-                    printWriter.println(this.blocks.get(i).getStudent().getNom());  // 4
-                    printWriter.println(this.blocks.get(i).getStudent().getPrenom());  // 5
-                    printWriter.println(this.blocks.get(i).getStudent().getDateNaissance());   // 6
-                    printWriter.println(this.blocks.get(i).getStudent().getHashID()); // 7
-                    printWriter.println(this.blocks.get(i).getStudent().getHashJAPD());  // 8
-                    printWriter.println(this.blocks.get(i).getStudent().getHashBAC());  // 9
-                    for (int j = 0; j < this.blocks.get(i).getStudent().getDiplomes().size(); j++)
-                        printWriter.println(Arrays.toString(this.blocks.get(i).getStudent().getDiplomes().get(j)));
+            FileWriter fileWriter = new FileWriter("blockchain.txt");
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            printWriter.println(this.blocks.size());
+            for (int i = 0; i < this.blocks.size(); i++) {
+                printWriter.printf("%d\n", this.blocks.get(i).getIndex());  // 0
+                printWriter.println(this.blocks.get(i).getTimestamp());  // 1
+                printWriter.println(this.blocks.get(i).getPreviousHash());  // 2
+                printWriter.println(this.blocks.get(i).getCurrentHash());  // 3
+                printWriter.println(this.blocks.get(i).getStudent().getNom());  // 4
+                printWriter.println(this.blocks.get(i).getStudent().getPrenom());  // 5
+                printWriter.println(this.blocks.get(i).getStudent().getDateNaissance());   // 6
+                printWriter.println(this.blocks.get(i).getStudent().getHashID()); // 7
+                printWriter.println(this.blocks.get(i).getStudent().getHashJAPD());  // 8
+                printWriter.println(this.blocks.get(i).getStudent().getHashBAC());  // 9
+                for (int j = 0; j < this.blocks.get(i).getStudent().getDiplomes().size(); j++)
+                    printWriter.println(Arrays.toString(this.blocks.get(i).getStudent().getDiplomes().get(j)));
 
-                    printWriter.println("DONE");
-                }
-                printWriter.close();
-            }else{
-                FileWriter fileWriter = new FileWriter("blockchain.txt", true);
-                PrintWriter printWriter = new PrintWriter(fileWriter);
-                printWriter.println(this.blocks.size());
-                for (int i = 0; i < this.blocks.size(); i++) {
-                    printWriter.printf("%d\n", this.blocks.get(i).getIndex());       // 0
-                    printWriter.println(this.blocks.get(i).getTimestamp().toString()); // 1
-                    printWriter.println(this.blocks.get(i).getPreviousHash());         // 2
-                    printWriter.println(this.blocks.get(i).getCurrentHash());          // 3
-//                    printWriter.println(this.blocks.get(i).getStudent().getIdStudent());  // 4
-                    printWriter.println(this.blocks.get(i).getStudent().getNom());      // 4
-                    printWriter.println(this.blocks.get(i).getStudent().getPrenom());   // 5
-                    printWriter.println(this.blocks.get(i).getStudent().getDateNaissance());   // 6
-                    printWriter.println(this.blocks.get(i).getStudent().getHashID());   // 7
-                    printWriter.println(this.blocks.get(i).getStudent().getHashJAPD()); // 8
-                    printWriter.println(this.blocks.get(i).getStudent().getHashBAC());  // 9
-                    for (int j = 0; j < this.blocks.get(i).getStudent().getDiplomes().size(); j++)  // 10
-                        printWriter.println(Arrays.toString(this.blocks.get(i).getStudent().getDiplomes().get(j)));
-
-                    printWriter.println("DONE");
-                }
-                printWriter.close();
+                printWriter.println("DONE");
             }
+            printWriter.close();
         }catch(IOException e){
             e.printStackTrace();
         }
