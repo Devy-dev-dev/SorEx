@@ -8,11 +8,8 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 
 public class UniversityServer {
-<<<<<<< HEAD
-=======
     private final Object mutex = new Object();
 
->>>>>>> f7813f30366f88fe6b84b9daa49e35e8ac43f822
     public static void main(String[] args){
         Socket s = null;
         ServerSocket s1 = null;
