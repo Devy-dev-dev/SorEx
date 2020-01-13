@@ -2,6 +2,10 @@ import src.Blockchain;
 import src.Student;
 
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.concurrent.Semaphore;
 
@@ -39,6 +43,34 @@ public class Main {
             b.writeBlockchain();
             mutex.release();
         }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+        retrieveBlockchainFromFile();
+    }
+
+    public static void retrieveBlockchainFromFile(){
+        try {
+            File file = new File("blockchain.txt");
+            FileReader fr = new FileReader(file);   //reads the file
+            BufferedReader br = new BufferedReader(fr);  //creates a buffering character input stream
+            StringBuffer sb = new StringBuffer();    //constructs a string buffer with no characters
+            String line;
+            String temp = "";
+            while ((line = br.readLine()) != null) {
+                if(line.charAt(0) == "[".charAt(0)) {
+                    temp = line;
+                    while(!temp.contains("DONE")) {
+                        temp += br.readLine();
+                    }
+                    line = temp;
+                    temp = "";
+                }
+                System.out.println("line : "+line);
+
+            }
+        }
+        catch (IOException e){
             e.printStackTrace();
         }
 
