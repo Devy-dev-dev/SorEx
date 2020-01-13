@@ -27,6 +27,12 @@ public class Main {
         // ajout d'un nouveau diplôme de l'étudiant
         b.getBlock().get(1).getStudent().addDiplomes(new String[] {"L2", "Geol", "UPMC", "2020", "14.7"});
         b.getBlock().get(1).getStudent().addDiplomes(new String[] {"L3", "Geol", "UPMC", "2020", "14.7"});
+
+        // tester marie qui modifie le hash de l'étudiant X
+        String blocDeEtudiant = "72c961a2868c095c2344ccc49e5efe8e50dafa20d5a9ed60154b6a3f183ddada582aaaa8d43ac1fed2725a526c47db32189d33a334fae4ce52ff709bb9dff221";
+
+
+        // Robin n'est pas concerné
         Blockchain copy = b.fork();
         b.addBlock(new Student(nom, prenom, l, id, japd, bac, diplomes));
         copy.addBlock(b.getLastBlock());

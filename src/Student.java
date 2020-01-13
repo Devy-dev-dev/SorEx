@@ -213,6 +213,10 @@ public class Student {
         return hashID;
     }
 
+    public void setHashID(String id){
+        this.hashID = id;
+    }
+
     public String getHashJAPD() {
         return hashJAPD;
     }
