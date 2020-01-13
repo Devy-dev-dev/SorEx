@@ -72,10 +72,6 @@ public class MinimalBlock extends ArrayList<MinimalBlock> {
         return index;
     }
 
-//    public LocalDate getTimestamp() {
-//        return timestamp;
-//    }
-
 
     public String getTimestamp() {
         return timestamp.toString();
@@ -88,7 +84,6 @@ public class MinimalBlock extends ArrayList<MinimalBlock> {
     @Override
     public String toString(){
         String infoBlock ="";
-//        infoBlock += "student hash  : "+getStudent().getIdStudent()+"\n";
         infoBlock += "current hash  : " +this.currentHash+" ";
         infoBlock += "\nprevious hash : " +this.previousHash+" ";
         infoBlock += "\nindex & timestamp : "+index +" "+timestamp+" ";

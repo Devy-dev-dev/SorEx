@@ -37,9 +37,6 @@ public class Student {
     private ArrayList<String[]> diplomes;  // enregistre les diplômes
 
     // Ce qui est hashed :
-    // SUPPRIMEEEE !!!!
-//    private final String idStudent;  // unique ID -> final
-    // =====
     private String nom;
     private String prenom;
 //    private LocalDate dateNaissance;  // https://www.baeldung.com/java-8-date-time-intro
@@ -63,7 +60,6 @@ public class Student {
         this.hashBAC = imageHash("src/documentsStudent/BAC.png"); // genere le SHA de la JAPD
         String[] diplomeDetail = new String[]{"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
         this.diplomes.add(diplomeDetail);
-//        this.idStudent = uniqueHash();
     }
 
     // ajout d'un nouvel étudiant
@@ -81,12 +77,10 @@ public class Student {
         this.hashJAPD = imageHash(pathToJAPD); // genere le SHA de la JAPD
         this.hashBAC = imageHash(pathToBAC); // genere le SHA de la JAPD
         this.diplomes.add(diplomeDetail);
-//        this.idStudent = uniqueHash();
     }
 
     // copie un étudiant. Sert à fork la blockchain
     private Student(Student origin){
-//        this.idStudent = new String(origin.getIdStudent());
         this.nom = new String(origin.getNom());
         this.prenom = new String(origin.getPrenom());
         this.dateNaissance = new String(origin.getDateNaissance());
@@ -103,7 +97,6 @@ public class Student {
                     boolean readFromFile) {
 
         if (readFromFile) {
-//            this.idStudent = idStudent;
             this.diplomes = new ArrayList<>();
             this.statutValide = true;
             this.nom = nom;
@@ -112,7 +105,6 @@ public class Student {
             this.hashID = pathToID; // genere le SHA de l'ID
             this.hashJAPD = pathToJAPD; // genere le SHA de la JAPD
             this.hashBAC = pathToBAC; // genere le SHA de la JAPD
-//            this.diplomes.add(diplomeDetail);
         }
 
     }
@@ -175,7 +167,6 @@ public class Student {
     @Override
     public String toString(){
         StringBuilder affichage = new StringBuilder();
-//        affichage.append("\n|||");
         affichage.append("\nHash ID   : ").append(this.hashID).append("\n");
         affichage.append("Hash JAPD : ").append(this.hashJAPD).append("\n");
         affichage.append("Hash BAC  : ").append(this.hashBAC).append("\n");
@@ -203,10 +194,6 @@ public class Student {
     public int getNbStudent(){
         return nbStudent;
     }
-
-//    public String getIdStudent(){
-//        return idStudent;
-//    }
 
     public boolean isStatutValide() {
         return statutValide;
@@ -251,14 +238,6 @@ public class Student {
     public String getHashBAC() {
         return hashBAC;
     }
-
-//    public String[] getDiplomeDetail() {
-//        return diplomeDetail;
-//    }
-//
-//    public void setDiplomeDetail(String[] diplomeDetail) {
-//        this.diplomeDetail = diplomeDetail;
-//    }
 
     public ArrayList<String[]> getDiplomes() {
         return diplomes;

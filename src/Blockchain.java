@@ -22,13 +22,6 @@ public class Blockchain{
         int size = 0;
         for(int i = 0; i < origin.getBlock().size(); i++){
             Student tempStudent = origin.getBlock().get(i).getStudent().fork();
-
-//            if (i == 0)
-//                this.blocks.add(new MinimalBlock(size, origin.getBlock().get(i).getTimestamp(), tempStudent, "empty"));
-//            else
-//                this.blocks.add(new MinimalBlock(size, origin.getBlock().get(i).getTimestamp(), tempStudent, this.blocks.get(this.blocks.size() - 1).getCurrentHash()));
-//            size++;
-
             if (i == 0)
                 this.blocks.add(new MinimalBlock(size, origin.getBlock().get(i).getTimestamp(), tempStudent, "empty"));
             else
@@ -67,12 +60,6 @@ public class Blockchain{
         }
         return -1;
     }
-
-
-//    public void addBlock(Blockchain this, MinimalBlock blocks){
-//        if(!blocks.isEmpty())
-//            addBlock(blocks.getStudent());
-//    }
 
 
     public int getChainSize(){
@@ -131,10 +118,6 @@ public class Blockchain{
                 System.out.println("Difference of birthday at block "+i);
             }
 
-//            if(!this.blocks.get(i).getStudent().getIdStudent().equals(blocks.get(i).getStudent().getIdStudent())){
-//                flag = false;
-//                System.out.println("Difference of student ID at block "+i);
-//            }
 
             if(!this.blocks.get(i).getStudent().getHashID().equals(blocks.get(i).getStudent().getHashID())){
                 flag = false;
@@ -182,6 +165,7 @@ public class Blockchain{
     }
 
 
+    // liste tous les hash des blocks
     public String[] listAllHash(){
         System.out.println("taille blockchain : "+this.blocks.size());
         String[] allHash = new String[this.blocks.size()];
@@ -189,13 +173,6 @@ public class Blockchain{
             allHash[i] = this.blocks.get(i).getCurrentHash();
         return allHash;
     }
-
-//    public String[] listAllHashStudent(){
-//        String[] allHash = new String[this.blocks.size()];
-//        for(int i = 0; i < this.blocks.size(); i++)
-//            allHash[i] = this.blocks.get(i).getStudent().getIdStudent();
-//        return allHash;
-//    }
 
 
     public ArrayList<MinimalBlock> getBlock(){
@@ -218,7 +195,6 @@ public class Blockchain{
         message += "timestamp     : "+this.blocks.get(this.blocks.size()-1).getTimestamp()+"\n";
         message += "previous hash : "+this.blocks.get(this.blocks.size()-1).getPreviousHash()+"\n";
         message += "current hash  : "+this.blocks.get(this.blocks.size()-1).getCurrentHash()+"\n";
-//        message += "student id    : "+this.blocks.get(this.blocks.size()-1).getStudent().getIdStudent()+"\n";
         return message;
     }
 
@@ -236,19 +212,19 @@ public class Blockchain{
             FileWriter fileWriter = new FileWriter("blockchain.txt");
             PrintWriter printWriter = new PrintWriter(fileWriter);
             printWriter.println(this.blocks.size());
-            for (int i = 0; i < this.blocks.size(); i++) {
-                printWriter.printf("%d\n", this.blocks.get(i).getIndex());  // 0
-                printWriter.println(this.blocks.get(i).getTimestamp());  // 1
-                printWriter.println(this.blocks.get(i).getPreviousHash());  // 2
-                printWriter.println(this.blocks.get(i).getCurrentHash());  // 3
-                printWriter.println(this.blocks.get(i).getStudent().getNom());  // 4
-                printWriter.println(this.blocks.get(i).getStudent().getPrenom());  // 5
-                printWriter.println(this.blocks.get(i).getStudent().getDateNaissance());   // 6
-                printWriter.println(this.blocks.get(i).getStudent().getHashID()); // 7
-                printWriter.println(this.blocks.get(i).getStudent().getHashJAPD());  // 8
-                printWriter.println(this.blocks.get(i).getStudent().getHashBAC());  // 9
-                for (int j = 0; j < this.blocks.get(i).getStudent().getDiplomes().size(); j++)
-                    printWriter.println(Arrays.toString(this.blocks.get(i).getStudent().getDiplomes().get(j)));
+            for (MinimalBlock block : this.blocks) {
+                printWriter.printf("%d\n", block.getIndex());  // 0
+                printWriter.println(block.getTimestamp());  // 1
+                printWriter.println(block.getPreviousHash());  // 2
+                printWriter.println(block.getCurrentHash());  // 3
+                printWriter.println(block.getStudent().getNom());  // 4
+                printWriter.println(block.getStudent().getPrenom());  // 5
+                printWriter.println(block.getStudent().getDateNaissance());   // 6
+                printWriter.println(block.getStudent().getHashID()); // 7
+                printWriter.println(block.getStudent().getHashJAPD());  // 8
+                printWriter.println(block.getStudent().getHashBAC());  // 9
+                for (int j = 0; j < block.getStudent().getDiplomes().size(); j++)
+                    printWriter.println(Arrays.toString(block.getStudent().getDiplomes().get(j)));
 
                 printWriter.println("DONE");
             }
