@@ -1,5 +1,3 @@
-import jdk.nashorn.internal.ir.Block;
-import jdk.nashorn.internal.ir.BlockLexicalContext;
 import src.Blockchain;
 import src.MinimalBlock;
 import src.Student;
@@ -10,8 +8,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.concurrent.Semaphore;
 
 public class Main {
@@ -33,7 +29,7 @@ public class Main {
         b.getBlock().get(1).getStudent().addDiplomes(new String[] {"L2", "Geol", "UPMC", "2020", "14.7"});
         b.getBlock().get(1).getStudent().addDiplomes(new String[] {"L3", "Geol", "UPMC", "2020", "14.7"});
 
-        // tester marie qui modifie le hash de l'étudiant X
+        // tester mairie qui modifie le hash de l'étudiant X
         String blocDeEtudiant = "72c961a2868c095c2344ccc49e5efe8e50dafa20d5a9ed60154b6a3f183ddada582aaaa8d43ac1fed2725a526c47db32189d33a334fae4ce52ff709bb9dff221";
 
 
@@ -41,7 +37,6 @@ public class Main {
         Blockchain copy = b.fork();
         b.addBlock(new Student(nom, prenom, l, id, japd, bac, diplomes));
         copy.addBlock(b.getLastBlock());
-        // pour partager l'information, il faut que l'université partage l'infos du Student aux autres pour qu'elles puissent créer le bloc.
 
 
         // TODO: rajouter possibilité préfecture de mettre à jour carte d'identité + nom et prénom
