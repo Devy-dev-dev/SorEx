@@ -1,7 +1,11 @@
 package src;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Blockchain{
     ArrayList<MinimalBlock> blocks = new ArrayList<>();
@@ -196,5 +200,31 @@ public class Blockchain{
 
     public MinimalBlock getLastBlock(){
         return this.blocks.get(this.blocks.size()-1);
+    }
+
+    public void writeBlockchain() {
+        try {
+            FileWriter fileWriter = new FileWriter("blockchain.txt");
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            for(int i = 0; i < this.blocks.size(); i++){
+                printWriter.printf("%d\n",this.blocks.get(i).getIndex());
+                printWriter.println(this.blocks.get(i).getTimestamp().toString());
+                printWriter.println(this.blocks.get(i).getPreviousHash());
+                printWriter.println(this.blocks.get(i).getCurrentHash());
+                printWriter.println(this.blocks.get(i).getStudent().getIdStudent());
+                printWriter.println(this.blocks.get(i).getStudent().getNom());
+                printWriter.println(this.blocks.get(i).getStudent().getPrenom());
+                printWriter.println(this.blocks.get(i).getStudent().getHashID());
+                printWriter.println(this.blocks.get(i).getStudent().getHashJAPD());
+                printWriter.println(this.blocks.get(i).getStudent().getHashBAC());
+                for(int j = 0; j < this.blocks.get(i).getStudent().getDiplomes().size(); j++)
+                    printWriter.println(Arrays.toString(this.blocks.get(i).getStudent().getDiplomes().get(j)));
+
+                printWriter.println();
+            }
+            printWriter.close();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }
