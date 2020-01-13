@@ -8,7 +8,7 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 
 public class StudentClient {
-    public static void main(String args[]) throws IOException{
+    public static void main(String[] args) throws IOException{
         InetAddress address = InetAddress.getLocalHost();
         Socket s = null;
         String line = null;
