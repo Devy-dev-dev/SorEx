@@ -37,6 +37,15 @@ public class Main {
         Blockchain copy = b.fork();
         b.addBlock(new Student(nom, prenom, l, id, japd, bac, diplomes));
         copy.addBlock(b.getLastBlock());
+        copy.getBlock().get(1).getStudent().addDiplomes(diplomes);
+        copy.getBlock().get(1).getStudent().addDiplomes(diplomes);
+        copy.getBlock().get(1).getStudent().addDiplomes(diplomes);
+        System.out.println("b : ");
+        b.addDiplomaFromUpdatedBlockchain(copy);
+        System.out.println(b);
+        System.out.println("\n\n\ncopy : ");
+        System.out.println(copy);
+        System.out.println("b = copy ? : "+b.verifyAllBlockchain(copy));
 
 
         // TODO: rajouter possibilité préfecture de mettre à jour carte d'identité + nom et prénom

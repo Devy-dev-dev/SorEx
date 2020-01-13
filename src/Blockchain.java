@@ -238,5 +238,18 @@ public class Blockchain{
         }
     }
 
+    // ajoute de nouveaux diplômes à partir d'un bloc qui a été mise à jour
+    public void addDiplomaFromUpdatedBlockchain(Blockchain b2){
+      for(int i = 0; i < this.blocks.get(i).getStudent().getDiplomes().size(); i++){
+          int tailleBlockThis  = this.blocks.get(i).getStudent().getDiplomes().size();
+          int tailleBlockOther = b2.getBlock().get(i).getStudent().getDiplomes().size();
+          if(tailleBlockOther > tailleBlockThis){
+              for(int j = tailleBlockThis; j < tailleBlockOther; j++){
+                  this.blocks.get(i).getStudent().addDiplomes(b2.getBlock().get(i).getStudent().getDiplomes().get(j));
+              }
+          }
+      }
+    }
+
 
 }
