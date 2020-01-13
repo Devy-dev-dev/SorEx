@@ -1,9 +1,13 @@
+import com.sun.corba.se.impl.orbutil.concurrent.Mutex;
 import src.Blockchain;
 import src.Student;
 
 import java.io.*;
+import java.lang.invoke.MutableCallSite;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,13 +36,20 @@ public class Main {
         // TODO: rajouter possibilité préfecture de mettre à jour carte d'identité + nom et prénom
         // TODO: ajouter possibilité chiffrer addresse et clef privée --> récupérer adresse étudiant
 
-        writeBlockchain(b);
+        final Semaphore mutex = new Semaphore(1);
+        try {
+            mutex.acquire();
+            writeBlockchain(b);
+            mutex.release();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
 
     }
 
     private static void writeBlockchain(Blockchain b) {
         try {
-            FileWriter fileWriter = new FileWriter("myObjects.txt");
+            FileWriter fileWriter = new FileWriter("blockchain.txt");
             PrintWriter printWriter = new PrintWriter(fileWriter);
             for(int i = 0; i < b.getBlock().size(); i++){
                 printWriter.printf("%d\n",b.getBlock().get(i).getIndex());
