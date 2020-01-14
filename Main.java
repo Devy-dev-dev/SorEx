@@ -41,54 +41,7 @@ public class Main {
         copy.getBlock().get(1).getStudent().addDiplomes(diplomes);
         copy.getBlock().get(1).getStudent().addDiplomes(diplomes);
         b.addDiplomaFromUpdatedBlockchain(copy);
-//        System.out.println("b : "+b);
-//        System.out.println("\n\n\ncopy : ");
-//        System.out.println(copy);
-//        System.out.println("b = copy ? : "+b.verifyAllBlockchain(copy));
 
-
-        // TODO: rajouter possibilité préfecture de mettre à jour carte d'identité + nom et prénom
-        // TODO: ajouter possibilité chiffrer addresse et clef privée --> récupérer adresse étudiant
-
-
-        // protection de la ressource critique
-        final Semaphore mutex = new Semaphore(1);
-        try {
-            mutex.acquire();
-            Blockchain bRead = new Blockchain();
-            bRead = bRead.retrieveBlockchainFromFile();
-//            System.out.println("bRead null : "+(bRead == null));
-//            System.out.println(bRead.toString());
-            bRead.writeBlockchain();
-            mutex.release();
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-
-        try {
-            mutex.acquire();
-            Blockchain bRead = new Blockchain();
-//            bRead = bRead.retrieveBlockchainFromFile();
-//            System.out.println("bRead null : "+(bRead == null));
-//            System.out.println(bRead.toString());
-            b.writeBlockchain();
-            mutex.release();
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-
-
-
-
-
-//        bRead = bRead.retrieveBlockchainFromFile();
-//        System.out.println("bRead null : "+(bRead == null));
-//        System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHH");
-//        System.out.println(bRead.toString());
-
-
-
-//        System.out.println("b = bRead ? : "+b.verifyAllBlockchain(bRead));
 
     }
 
