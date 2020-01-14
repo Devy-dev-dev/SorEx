@@ -29,7 +29,8 @@ One block stores much information about a student:
   - its JAPD certificate (hashed)
   - its baccalauréat certificate (hashed)
   - its status (boolean, valid or not)
-  its diplomas (not hashed), example:
-  L1, Computer Science, Sorbonne Université, 2017, 12.3
-  L2, Computer Science, Sorbonne Université, 2018, 14.6
+  - its diplomas (not hashed), example:  
+      L1, Computer Science, Sorbonne Université, 2017, 12.3  
+      L2, Computer Science, Sorbonne Université, 2018, 14.6  
+      
 there is no spending system since this blockchain is not made for cryptocurrency
