@@ -34,28 +34,64 @@ public class StudentClient {
         if(port == 6060){ // 6060 for university, 8080 for prefecture
             try{
                 fromServer = inFromServer.readLine();
-                System.out.println("From Server: " + fromServer);// first name question
+                System.out.println("From Server: " + fromServer);// choose service
                 message = inFromUser.readLine();
-                outToServer.writeBytes(message + '\n');// write answer
-    
-                fromServer = inFromServer.readLine();
-                System.out.println("From Server: " + fromServer);// last name question
-                message = inFromUser.readLine();
-                outToServer.writeBytes(message + '\n');// write answer
-    
-                fromServer = inFromServer.readLine();
-                System.out.println("From Server: " + fromServer);// birth date question
-                message = inFromUser.readLine();
-                outToServer.writeBytes(message + '\n');// write answer
-    
-                System.out.println("SorEx is processing...");
-                fromServer = inFromServer.readLine();
-                System.out.println("From Server: " + fromServer);// return hash code
+                outToServer.writeBytes(message + '\n');// write 1 or 2 or 3
+                if(Integer.parseInt(message) == 1){
+                    try{
+                        fromServer = inFromServer.readLine();
+                        System.out.println("From Server: " + fromServer);// first name question
+                        message = inFromUser.readLine();
+                        outToServer.writeBytes(message + '\n');// write answer
+            
+                        fromServer = inFromServer.readLine();
+                        System.out.println("From Server: " + fromServer);// last name question
+                        message = inFromUser.readLine();
+                        outToServer.writeBytes(message + '\n');// write answer
+            
+                        fromServer = inFromServer.readLine();
+                        System.out.println("From Server: " + fromServer);// birth date question
+                        message = inFromUser.readLine();
+                        outToServer.writeBytes(message + '\n');// write answer
+            
+                        System.out.println("SorEx is processing...");
+                        fromServer = inFromServer.readLine();
+                        System.out.println("From Server: " + fromServer);// return hash code
+                    }catch(IOException e){
+                        e.printStackTrace();
+                        System.out.println("Socket read Error");
+                    }
+                }else if(Integer.parseInt(message) == 2){
+                    try{
+                        fromServer = inFromServer.readLine();
+                        System.out.println("From Server: " + fromServer);// server asks for block's hash code
+                        message = inFromUser.readLine();
+                        outToServer.writeBytes(message + '\n');// write hash code
+            
+                        fromServer = inFromServer.readLine();
+                        System.out.println("From Server: " + fromServer);// return answer valid/invalid
+                    }catch(IOException e){
+                        e.printStackTrace();
+                        System.out.println("Socket read Error");
+                    }
+                }else{
+                    try{
+                        fromServer = inFromServer.readLine();
+                        System.out.println("From Server: " + fromServer);// server asks for block's hash code
+                        message = inFromUser.readLine();
+                        outToServer.writeBytes(message + '\n');// write hash code
+            
+                        fromServer = inFromServer.readLine();
+                        System.out.println("From Server: " + fromServer);// return diplome added
+                    }catch(IOException e){
+                        e.printStackTrace();
+                        System.out.println("Socket read Error");
+                    }
+                }
             }catch(IOException e){
                 e.printStackTrace();
                 System.out.println("Socket read Error");
-            }
-            finally{
+            }finally{
                 inFromServer.close();
                 outToServer.close();
                 inFromUser.close();
@@ -72,7 +108,6 @@ public class StudentClient {
                 System.out.println("SorEx is processing...");
                 fromServer = inFromServer.readLine();
                 System.out.println("From Server: " + fromServer);// get new ID hash from prefecture
-
             }catch(IOException e){
                 e.printStackTrace();
                 System.out.println("Socket read Error");

@@ -93,18 +93,18 @@ public class Student {
 
     // sert à recréer l'étudiant depuis la lecture d'un fichier
     private Student(String nom, String prenom, String dateNaissance,
-                   String pathToID, String pathToJAPD, String pathToBAC,
+                   String pathToID, String pathToJAPD, String pathToBAC, boolean status,
                     boolean readFromFile) {
 
         if (readFromFile) {
             this.diplomes = new ArrayList<>();
-            this.statutValide = true;
             this.nom = nom;
             this.prenom = prenom;
             this.dateNaissance = dateNaissance;
             this.hashID = pathToID; // genere le SHA de l'ID
             this.hashJAPD = pathToJAPD; // genere le SHA de la JAPD
             this.hashBAC = pathToBAC; // genere le SHA de la JAPD
+            this.statutValide = status;
         }
 
     }
@@ -188,8 +188,8 @@ public class Student {
     // sert à créer un nouvel étudiant depuis le fichier lu
     public Student newStudentFromFile(String nom, String prenom,
                                       String dateNaissance, String ID,
-                                      String JAPD, String BAC, String[] formation){
-        Student s = new Student(nom, prenom, dateNaissance, ID, JAPD, BAC, true);
+                                      String JAPD, String BAC, boolean status, String[] formation){
+        Student s = new Student(nom, prenom, dateNaissance, ID, JAPD, BAC, status, true);
         for (String value : formation) s.addDiplomes(value.split(" "));
         return s;
     }

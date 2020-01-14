@@ -225,6 +225,7 @@ public class Blockchain{
                 printWriter.println(block.getStudent().getHashID()); // 7
                 printWriter.println(block.getStudent().getHashJAPD());  // 8
                 printWriter.println(block.getStudent().getHashBAC());  // 9
+                printWriter.println(block.getStudent().isStatutValide());  // 10
                 for (int j = 0; j < block.getStudent().getDiplomes().size(); j++)
                     printWriter.println(Arrays.toString(block.getStudent().getDiplomes().get(j)));
 
@@ -300,7 +301,7 @@ public class Blockchain{
             Blockchain bTemp = null;
             for (int i = 0; i < blockchainArray.length; i++) {
                 String[] data = blockchainArray[i].split("\n");
-                int parcoursData = 10;
+                int parcoursData = 11;
                 StringBuilder inlineformation = new StringBuilder();
                 while (parcoursData < data.length) {
                     inlineformation.append(data[parcoursData]).append("\n");
@@ -318,6 +319,7 @@ public class Blockchain{
                         data[7],
                         data[8],
                         data[9],
+                        Boolean.parseBoolean(data[10]),
                         formation
                 );
 
