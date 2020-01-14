@@ -11,25 +11,47 @@ import java.util.ArrayList;
 // créer un block minimal, et va servir à créer le 1er block
 public class MinimalBlock extends ArrayList<MinimalBlock> {
     private int index;
-    private LocalDate timestamp;
+    private String timestamp;
     private Student student;
     private String previousHash;
     private String currentHash;
 
-    public MinimalBlock(int index, LocalDate timestamp, Student s, String previousHash){
+    public MinimalBlock(int index, String timestamp, Student s, String previousHash){
         this.index = index;
-        this.timestamp = timestamp;
+        this.timestamp = timestamp.toString();
         this.student = s;
         this.previousHash = previousHash;
         this.currentHash = hashingFunction();
     }
+
+    private MinimalBlock(int index, String timestamp, Student s, String previousHash, String currentHash){
+        this.index = index;
+        this.timestamp = timestamp.toString();
+        this.student = s;
+        this.previousHash = previousHash;
+        this.currentHash = currentHash;
+
+    }
+
+    public MinimalBlock(){
+
+    }
+
+    public MinimalBlock minimalBlockFromFile(int index, String timestamp,
+                                             Student s,
+                                             String previousHash, String currentHash){
+        return new MinimalBlock(index, timestamp, s, previousHash, currentHash);
+    }
+
+
 
 
 
     public String hashingFunction(){
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
-            String data = index + timestamp.toString() + student.getIdStudent() + previousHash;
+//            String data = index + timestamp.toString() + student.getIdStudent() + previousHash;
+            String data = index + timestamp.toString() + previousHash;
             byte[] b = data.getBytes(StandardCharsets.UTF_8);
             byte[] messageDigest = md.digest(b);
 
@@ -59,8 +81,9 @@ public class MinimalBlock extends ArrayList<MinimalBlock> {
         return index;
     }
 
-    public LocalDate getTimestamp() {
-        return timestamp;
+
+    public String getTimestamp() {
+        return timestamp.toString();
     }
 
     public Student getStudent() {
@@ -70,10 +93,9 @@ public class MinimalBlock extends ArrayList<MinimalBlock> {
     @Override
     public String toString(){
         String infoBlock ="";
-        infoBlock += "student hash  : "+getStudent().getIdStudent()+"\n";
-        infoBlock += "current hash  : " +this.currentHash+"\n";
-        infoBlock += "previous hash : " +this.previousHash+"\n";
-        infoBlock += index +" "+timestamp+" ";
+        infoBlock += "current hash  : " +this.currentHash+" ";
+        infoBlock += "\nprevious hash : " +this.previousHash+" ";
+        infoBlock += "\nindex & timestamp : "+index +" "+timestamp+" ";
         infoBlock += student.toString();
         return infoBlock;
     }
