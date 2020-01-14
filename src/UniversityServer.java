@@ -3,7 +3,6 @@ package src;
 import java.io.*;
 import java.net.*;
 
-
 public class UniversityServer {
 
     public static void main(String[] args){
@@ -13,7 +12,7 @@ public class UniversityServer {
 
         try{
             int port = Integer.parseInt(args[0]);
-            s1 = new ServerSocket(port);
+            s1 = new ServerSocket(port);  // s1 is not closed because we want to accept incoming clients
         }catch(IOException e){
             e.printStackTrace();
             System.out.println("Server error");

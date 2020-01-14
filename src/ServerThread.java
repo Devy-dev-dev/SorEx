@@ -5,7 +5,6 @@ import java.time.*;
 import java.net.*;
 import java.util.concurrent.Semaphore;
 
-
 class ServerThread extends Thread{  
     Student student;
     Blockchain b = new Blockchain();

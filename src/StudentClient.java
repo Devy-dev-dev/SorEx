@@ -3,7 +3,6 @@ package src;
 import java.io.*;
 import java.net.*;
 
-
 public class StudentClient {
     public static void main(String[] args) throws IOException{
         InetAddress address = InetAddress.getLocalHost();
@@ -87,5 +86,4 @@ public class StudentClient {
             }
         }
     }
-        
 }
