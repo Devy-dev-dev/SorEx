@@ -1,7 +1,7 @@
-# rzsssr
+# SorEx
 
 ## INTRODUCTION
-Source code available at: https://github.com/Devy-dev-dev/rzsssr
+Source code available at: https://github.com/Devy-dev-dev/SorEx
 The name is inspired from “Sardex”, a blockchain in Sardinia.
 
 ## Why this blockchain was made  
