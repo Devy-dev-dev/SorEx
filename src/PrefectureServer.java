@@ -9,7 +9,7 @@ public class PrefectureServer {
         int port;
         port = Integer.parseInt(args[0]);
         ServerSocket serverSocket = new ServerSocket(port);
-        System.out.println("Prefecture Server is listening");
+        System.out.println("Prefecture Server is listening...");
         SorEx(serverSocket);
     }
 
@@ -37,9 +37,9 @@ public class PrefectureServer {
             int indexOfBlock = b.findBlockFromHash(hashOfBlock);
             String hashOfNewID = b.getBlock().get(indexOfBlock).getStudent().imageHash("src/documentsStudent/ID_nouvelle.png");
             b.getBlock().get(indexOfBlock).getStudent().setHashID(hashOfNewID);
+            b.writeBlockchain();
             System.out.println("New ID hash: "+hashOfNewID);
             outToClient.println("Congratulations! Your new ID hash is: "+hashOfNewID);
-            b.writeBlockchain();
             mutex.release();
         }catch (InterruptedException e){
             e.printStackTrace();
