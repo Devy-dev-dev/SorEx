@@ -58,7 +58,7 @@ class ServerThread extends Thread{
                         outToClient.println("Please enter your birth date YYYY-MM-DD:");
                         LocalDate birthDate = LocalDate.parse(inFromClient.readLine());
                         
-                        String[] diplomes = new String[] {"L3", "Info", "UPMC", "2019", "14.7"};
+                        String[] diplomes = new String[] {"L2", "Info", "UPMC", "2019", "14.7"};
             
                         student = new Student(firstName, 
                                         LastName, 
@@ -115,7 +115,7 @@ class ServerThread extends Thread{
                         mutex.acquire();
                         b = b.retrieveBlockchainFromFile();
                         int indexOfBlock = b.findBlockFromHash(hashOfBlock);
-                        String[] diplomes = {"L3", "DANT", "Sorbonne", "2020", "14.7"};
+                        String[] diplomes = {"L3", "DANT", "Sorbonne", "2020", "16.2"};
                         b.getBlock().get(indexOfBlock).getStudent().addDiplomes(diplomes);
                         outToClient.println("Diplome added: " + Arrays.toString(diplomes));
                         System.out.println("Diplome added: " + Arrays.toString(diplomes));
