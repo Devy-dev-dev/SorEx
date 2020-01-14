@@ -96,7 +96,7 @@ class ServerThread extends Thread{
                         b = b.retrieveBlockchainFromFile();
                         int indexOfBlock = b.findBlockFromHash(hashOfBlock);
                         Boolean status = b.getBlock().get(indexOfBlock).getStudent().isStatutValide();
-                        if(status == true){
+                        if(status){
                             outToClient.println("Your status is valid.");
                             System.out.println("The status of student is valid");
                         }else{

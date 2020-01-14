@@ -200,9 +200,6 @@ public class Student {
     // ------------------------------------------------------------------------------- //
     // ------------------------------ GETTERS & SETTERS ------------------------------ //
     // ------------------------------------------------------------------------------- //
-    public int getNbStudent(){
-        return nbStudent;
-    }
 
     public boolean isStatutValide() {
         return statutValide;
@@ -216,17 +213,11 @@ public class Student {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
 
     public String getPrenom() {
         return prenom;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
 
     public String getDateNaissance() {
         return dateNaissance;
