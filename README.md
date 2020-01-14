@@ -27,7 +27,7 @@ Other administration institutions such as a prefecture can also use the blockcha
     - 1 secondary entity: Student
 When the student is enrolled, the server (Sorbonne Université) store the hash of the student data in the blockchain and add a new block based on the information the student gave. The student receives the hash of its block and can use it to confirm its identity. This block contains in plain text (not hashed) the diplomas of the student and if its status isvalid or not. The other data are hashed;
 A university can check the status of students (list of diploma and if the student is valid or not);
-The prefecture can update the hash of the ID card of a student (in France, an ID card has to be renewed every ten years);
+The prefecture can update the hash of the ID card of a student (in France, an ID card has to be renewed every ten years);  
 One block stores much information about a student:
   - its ID card (hashed)
   - its JAPD certificate (hashed)
