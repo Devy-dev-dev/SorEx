@@ -1,11 +1,8 @@
 package src;
 
 import java.io.*;
-import java.time.*;
-import java.util.*;
 import java.net.*;
-import java.awt.*;
-import javax.imageio.ImageIO;
+
 
 public class UniversityServer {
 
@@ -15,7 +12,8 @@ public class UniversityServer {
         System.out.println("Server Listening......");
 
         try{
-            s1 = new ServerSocket(8080);
+            int port = Integer.parseInt(args[0]);
+            s1 = new ServerSocket(port);
         }catch(IOException e){
             e.printStackTrace();
             System.out.println("Server error");

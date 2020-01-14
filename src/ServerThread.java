@@ -2,17 +2,13 @@ package src;
 
 import java.io.*;
 import java.time.*;
-import java.util.*;
 import java.net.*;
-import java.awt.*;
-import javax.imageio.ImageIO;
 import java.util.concurrent.Semaphore;
 
 
 class ServerThread extends Thread{  
     Student student;
     Blockchain b = new Blockchain();
-
     String line = null;
     String message;
     BufferedReader inFromClient = null;
@@ -59,23 +55,21 @@ class ServerThread extends Thread{
                             "src/documentsStudent/JAPD.png", 
                             "src/documentsStudent/BAC.png",
                             diplomes);
-            //student = new Student();
-            b.addBlock(student);
-
-            String blockHash = b.getBlock().get(b.getBlock().size()-1).getCurrentHash();
-            System.out.println("Student is waiting...");
-            System.out.println("New block hash: "+blockHash);
-            outToClient.println("Congratulations! Your hash is: "+blockHash);
-
+            
             final Semaphore mutex = new Semaphore(1);
             try {
                 mutex.acquire();
+                b = b.retrieveBlockchainFromFile();
+                b.addBlock(student);
+                String blockHash = b.getBlock().get(b.getBlock().size()-1).getCurrentHash();
+                System.out.println("Student is waiting...");
+                System.out.println("New block hash: "+blockHash);
+                outToClient.println("Congratulations! Your hash is: "+blockHash);
                 b.writeBlockchain();
                 mutex.release();
             }catch (InterruptedException e){
                 e.printStackTrace();
             }
-
         } catch (IOException e) {
             line = this.getName(); //reused String line for getting thread name
             System.out.println("IO Error/ Client "+line+" terminated abruptly");
