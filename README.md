@@ -18,6 +18,7 @@ if a person wants to cheat the system (example : cheat at the exams, try to add 
 when unfortunately a student dies, a university can disable its account and protect everyone from impersonation;
 the blockchain makes it possible for universities to check instantly that the student has the required documents without having the student to send those documents again;  
 When a student applies, the university involved verifies the student diploma and check that this student is not fraudulent by using the hash of the block sent by the student.  
+
 Other administration institutions such as a prefecture can also use the blockchain to update information about the student (example: in our blockchain, the prefecture can update the student id).   
 
 ## Features description
