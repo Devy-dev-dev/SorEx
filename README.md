@@ -3,11 +3,14 @@
 ## INTRODUCTION
 Source code available at: https://github.com/Devy-dev-dev/rzsssr
 The name is inspired from “Sardex”, a blockchain in Sardinia.
-Why this blockchain was made
+
+## Why this blockchain was made  
 When a student enrolls to a speciality or when graduating, a university must, for each student, send or ask by mail a lot of documents. This process is slow by nature, expensive, and is subject to very variable loss or delays. It appears necessary that a student can attest instantly and without any data lost that it possesses the documents asked (for example, during the 3rd year of a bachelor’s degree in France, a student applied to a 1st year of a master’s degree). On the other hand, the university wants to send in an instant and secure way the diplomas to the student. Since the number of students enrolling to university is increasing, the universities would benefit a lot from a process that simplify and automate the verification of documents.  
+
 Furthermore, universities often ask the same documents every year (example: the JAPD to enroll in a 3rd year of a bachelor’s degree). By using our blockchain, the university can instantly check that the student has those documents, avoiding the student to send it again the nth time.   
 When a student applied to a new speciality (example: a 1st year of master’s degree after a 3rd year of bachelor’s degree), the university just needs to compare the diploma recorded in the block of the student.  
 Why use a blockchain in this case? Is it not easier to ask directly to other universities the data about the student directly? Is is simpler to do so, but a blockchain has many advantages:  
+
 The university does not need anymore to record the documents in a numerical way, a simple hash is enough. If the university is hacked, the data of the students are protected;  
 The student possess the list of all its diploma thanks to the hash of the block it received during its first enrolment;
 If a university’s servers are down, another one can confirm the identity and diplomas of the student;  
