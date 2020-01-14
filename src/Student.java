@@ -110,7 +110,7 @@ public class Student {
     }
 
 
-    private String imageHash(String file) {
+    public String imageHash(String file) {
         File input = new File(file);    // image
         try {
             // try to load the image
