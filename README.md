@@ -38,3 +38,30 @@ One block stores much information about a student:
       L2, Computer Science, Sorbonne Université, 2018, 14.6  
       
 there is no spending system since this blockchain is not made for cryptocurrency
+
+
+
+## How to start
+
+```
+javac src/*.java
+```
+
+For services of universities:
+In one window:
+```
+java src.UniversityServer 6060
+```
+In other windows:
+```
+java src.StudentServer 6060
+```
+For services of prefecture:
+In one window:
+```
+java src.PrefectureServer 3030
+```
+In another window:
+```
+java src.StudentServer 3030
+```
