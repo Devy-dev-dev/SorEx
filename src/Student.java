@@ -204,45 +204,33 @@ public class Student {
     public boolean isStatutValide() {
         return statutValide;
     }
-
     public void setStatutValide(boolean statutValide) {
         this.statutValide = statutValide;
     }
-
     public String getNom() {
         return nom;
     }
-
-
     public String getPrenom() {
         return prenom;
     }
-
-
     public String getDateNaissance() {
         return dateNaissance;
     }
-
     public String getHashID() {
         return hashID;
     }
-
     public void setHashID(String id){
         this.hashID = id;
     }
-
     public String getHashJAPD() {
         return hashJAPD;
     }
-
     public String getHashBAC() {
         return hashBAC;
     }
-
     public ArrayList<String[]> getDiplomes() {
         return diplomes;
     }
-
     public void addDiplomes(String[] diplomes) {
         this.diplomes.add(diplomes);
     }
