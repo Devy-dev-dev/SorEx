@@ -181,9 +181,7 @@ public class Student {
     }
 
 
-    public Student fork(){
-        return new Student(this);
-    }
+    public Student fork(){ return new Student(this); }
 
     // sert à créer un nouvel étudiant depuis le fichier lu
     public Student newStudentFromFile(String nom, String prenom,
