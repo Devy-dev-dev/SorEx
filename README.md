@@ -54,7 +54,7 @@ java src.UniversityServer 6060
 ```
 In other windows:
 ```
-java src.StudentServer 6060
+java src.StudentClient 6060
 ```
 For services of prefecture:
 In one window:
@@ -63,5 +63,5 @@ java src.PrefectureServer 3030
 ```
 In another window:
 ```
-java src.StudentServer 3030
+java src.StudentClient 3030
 ```
